@@ -2,7 +2,7 @@
 
 namespace DocSystem.Models
 {
-    public class Percription
+    public class Prescription
     {
         public int Id { get; set; }
 
