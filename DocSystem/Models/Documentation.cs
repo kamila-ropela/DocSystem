@@ -10,7 +10,7 @@ namespace DocSystem.Models
 
         public int DoctorId { get; set; }
 
-        public string Desease { get; set; }
+        public string Disease { get; set; }
 
         public DateTime Date { get; set; }
     }

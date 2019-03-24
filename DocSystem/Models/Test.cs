@@ -14,7 +14,7 @@ namespace DocSystem.Models
         [Required]
         public string Type { get; set; }
 
-        public double Value { get; set; }
+        public string Value { get; set; }
 
         [Required]
         public string Description { get; set; }

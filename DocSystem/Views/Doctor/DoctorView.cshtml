@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewData["Title"] = "DoctorView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<form action="">
+    <datalist id="patients"></datalist>
+    <text> Type surname or PESEL to search for patient... </text></br>
+    <input type="text" name="patients" list="patients"> 
+    <button type="submit"  class="btn btn-primary">Submit</button>
+</form>
+
+
+<h2>Patient Info</h2>
+<ul class="list-group">
+    <li class="list-group-item">Name</li>
+    <li class="list-group-item">Surname</li>
+    <li class="list-group-item">PESEL</li>
+</ul>
+
+<h2> Visits </h2>
+<table class="table table-bordered">
+    <thead class="thead">
+        <tr>
+            <th>Doctor</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    <thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2> Tests </h2>
+<table class="table table-bordered">
+    <thead class="thead">
+        <tr>
+            <th>Type</th>
+            <th>Value</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2> Medicaments </h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Medicine</th>
+            <th>Description</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    </tbody>
+    <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
