@@ -1,4 +1,6 @@
-﻿namespace DocSystem.Models
+﻿using DocSystem.DatabaseFiles;
+
+namespace DocSystem.Models
 {
     public class Patient
     {
