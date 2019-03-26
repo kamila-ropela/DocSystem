@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocSystem.Models
 {
@@ -9,11 +10,13 @@ namespace DocSystem.Models
         public int PatientId { get; set; }
 
         public int DoctorId { get; set; }
-
+        
+        [Required]
         public string Type { get; set; }
 
         public string Value { get; set; }
 
+        [Required]
         public string Description { get; set; }
 
         public DateTime Date { get; set; }

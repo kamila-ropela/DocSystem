@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Lab\" />
+    <Folder Include="Views\Doctor\" />
+	<Folder Include="Views\Lab\" />
     <Folder Include="Views\Patient\" />
   </ItemGroup>
 
