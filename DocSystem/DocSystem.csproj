@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Lab\" />
+	<Folder Include="Views\Lab\" />
     <Folder Include="Views\Patient\" />
   </ItemGroup>
 

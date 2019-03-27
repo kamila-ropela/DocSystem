@@ -127,8 +127,6 @@ namespace DocSystem.DatabaseFiles
                             Id = Convert.ToInt32(reader["Id"]),
                             PatientId = Convert.ToInt32(reader["PatientId"]),
                             DoctorId = Convert.ToInt32(reader["DoctorId"]),
-                            Type = reader["Type"].ToString(),
-                            Value = reader["Value"].ToString(),
                             Description = reader["Description"].ToString(),
                             Date = Convert.ToDateTime(reader["Date"])
                         });
@@ -184,6 +182,7 @@ namespace DocSystem.DatabaseFiles
                             DoctorId = Convert.ToInt32(reader["DoctorId"]),
                             Medicine = reader["Medicine"].ToString(),
                             Description = reader["Description"].ToString(),
+                            Refund = Convert.ToInt32(reader["Refund"]),
                             Date = Convert.ToDateTime(reader["Date"])
                         });
                     }
@@ -220,9 +219,9 @@ namespace DocSystem.DatabaseFiles
             return list;
         }
 
-        public List<Note> GetNoteDb(string sqlCommand)
+        public List<MedicalDescription> GetMedicalDescriptionDb(string sqlCommand)
         {
-            List<Note> list = new List<Note>();
+            List<MedicalDescription> list = new List<MedicalDescription>();
 
             using (MySqlConnection conn = GetConnection())
             {
@@ -233,7 +232,7 @@ namespace DocSystem.DatabaseFiles
                 {
                     while (reader.Read())
                     {
-                        list.Add(new Note()
+                        list.Add(new MedicalDescription()
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             PatientId = Convert.ToInt32(reader["PatientId"]),
@@ -270,6 +269,33 @@ namespace DocSystem.DatabaseFiles
                             Doctor = reader["Doctor"].ToString(),
                             Status = reader["Status"].ToString(),
                             Date = Convert.ToDateTime(reader["Date"])
+                        });
+                    }
+                }
+            }
+            return list;
+        }
+
+        public List<Result> GetResultDb(string sqlCommand)
+        {
+            List<Result> list = new List<Result>();
+
+            using (MySqlConnection conn = GetConnection())
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand(sqlCommand, conn);
+
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        list.Add(new Result()
+                        {
+                            Id = Convert.ToInt32(reader["Id"]),
+                            TestId = Convert.ToInt32(reader["TestId"]),
+                            Value = Convert.ToDouble(reader["DoctorId"]),
+                            Name = reader["Type"].ToString(),
+                            Unit = reader["Doctor"].ToString()
                         });
                     }
                 }

@@ -15,5 +15,7 @@ namespace DocSystem.Models
         public string Description { get; set; }
 
         public DateTime Date { get; set; }
+
+        public int Refund { get; set; }
     }
 }

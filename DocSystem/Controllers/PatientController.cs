@@ -1,8 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace DocSystem.Controllers
+namespace Patients.Controllers
 {
     public class PatientController : Controller
     {
+        
+        public ActionResult PatientView()
+        {
+            return View();
+        }
     }
 }
