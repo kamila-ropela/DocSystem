@@ -57,3 +57,8 @@ C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\DocSystem.dll
 C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\DocSystem.pdb
 C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\DocSystem.csproj.CopyComplete
 C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\DoctorView.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientInfo.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientDoc.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientPrescription.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientTests.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientVisits.g.cshtml.cs
