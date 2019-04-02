@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using DocSystem.Models;
+using DocSystem.DatabaseFiles;
 
 namespace DocSystem.Controllers
 {
@@ -8,6 +9,7 @@ namespace DocSystem.Controllers
     {
         public IActionResult Index()
         {
+            Properties.dbContext = HttpContext.RequestServices.GetService(typeof(DbContext)) as DbContext;
             return View();
         }
 
