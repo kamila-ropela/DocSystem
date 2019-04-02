@@ -1,7 +1,6 @@
 
-.vs/*
-DocSystem/obj/*
-DocSystem/bin/*
+bin
+obj
 .vs/DocSystem/v15/.suo
 .vs/DocSystem/v15/.suo
 *.ide
