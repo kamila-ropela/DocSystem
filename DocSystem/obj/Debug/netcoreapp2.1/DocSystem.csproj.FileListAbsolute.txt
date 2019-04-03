@@ -91,3 +91,4 @@ C:\Users\marik\Documents\GitHub\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\DocS
 C:\Users\marik\Documents\GitHub\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\DocSystem.csproj.CopyComplete
 C:\Users\marik\Documents\GitHub\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\AddDocumentationView.g.cshtml.cs
 C:\Users\marik\Documents\GitHub\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Patient\Visits.g.cshtml.cs
+C:\Users\marik\Documents\GitHub\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Patient\MedicalDescriptions.g.cshtml.cs

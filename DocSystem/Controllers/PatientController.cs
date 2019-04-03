@@ -13,5 +13,9 @@ namespace Patients.Controllers
         {
             return View();
         }
+        public ActionResult MedicalDescriptions()
+        {
+            return View();
+        }
     }
 }
