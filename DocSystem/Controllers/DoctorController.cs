@@ -8,5 +8,9 @@ namespace DocSystem.Controllers
         {
             return View();
         }
+        public ActionResult AddDocumentationView()
+        {
+            return View();
+        }
     }
 }
