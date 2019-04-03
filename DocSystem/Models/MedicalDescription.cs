@@ -2,7 +2,7 @@
 
 namespace DocSystem.Models
 {
-    public class Note
+    public class MedicalDescription
     {
         public int Id { get; set; }
 

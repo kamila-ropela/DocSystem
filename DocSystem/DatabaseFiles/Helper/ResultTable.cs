@@ -1,6 +1,6 @@
 ﻿namespace DocSystem.DatabaseFiles.Helper
 {
-    public class NoteTable
+    public static class ResultTable
     {
     }
 }
