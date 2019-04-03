@@ -65,7 +65,7 @@ using DocSystem.Models;
             WriteLiteral("\r\n\r\n");
             EndContext();
             BeginContext(99, 264, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "211f3d4a65814f28963d5c79892f9571", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e02876040a76442595af22446e59f35a", async() => {
                 BeginContext(115, 241, true);
                 WriteLiteral("\r\n    <datalist id=\"patients\"></datalist>\r\n    <text> Type surname or PESEL to search for patient... </text></br>\r\n    <input type=\"text\" name=\"patients\" list=\"patients\"> \r\n    <button type=\"submit\"  class=\"btn btn-primary\">Submit</button>\r\n");
                 EndContext();

@@ -9,5 +9,9 @@ namespace Patients.Controllers
         {
             return View();
         }
+        public ActionResult Visits()
+        {
+            return View();
+        }
     }
 }
