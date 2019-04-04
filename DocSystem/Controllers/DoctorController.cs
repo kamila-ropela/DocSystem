@@ -8,5 +8,24 @@ namespace DocSystem.Controllers
         {
             return View();
         }
+
+        public ActionResult DoctorPrescription()
+        {
+            return View();
+        }
+
+
+        public ActionResult DoctorVisit()
+        {
+            return View();
+        }
+
+        public ActionResult DoctorSickLeave()
+        {
+            return View();
+        }
+
+
+
     }
 }
