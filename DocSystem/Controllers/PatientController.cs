@@ -10,14 +10,19 @@ namespace Patients.Controllers
         {
             return View();
         }
-
+        public ActionResult Visits()
+        {
+            return View();
+        }
+        public ActionResult MedicalDescriptions()
+        {
+            return View();
+        }
         public ActionResult PatientInfo()
         {
             ViewData["sickLeaveData"] = SickLeaveTable.GetData(); ;
             ViewData["prescriptioneData"] = PrescriptionTable.GetData();
-            ViewData["visitData"] = VisitTable.GetData(); ;
-
-            return View();
+            ViewData["visitData"] = VisitTable.GetData();
         }
     }
 }
