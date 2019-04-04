@@ -1,6 +1,6 @@
 ﻿namespace DocSystem.DatabaseFiles.Helper
 {
-    public class MedicalDescriptionTable
+    public static class MedicalDescriptionTable
     {
     }
 }
