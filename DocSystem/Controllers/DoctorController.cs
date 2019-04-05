@@ -56,5 +56,26 @@ namespace DocSystem.Controllers
             ViewData["tests"] = tests; 
             return View();
         }
+
+        public ActionResult DoctorPrescription()
+        {
+            return View();
+        }
+
+
+        public ActionResult DoctorVisit()
+        {
+            return View();
+        }
+
+        public ActionResult DoctorSickLeave()
+        {
+            return View();
+        }
+
+        public ActionResult AddDocumentationView()
+        {
+            return View();
+        }
     }
 }
