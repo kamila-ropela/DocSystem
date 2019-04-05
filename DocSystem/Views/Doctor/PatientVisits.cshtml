@@ -51,6 +51,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
+            <td>
+                @Html.ActionLink("Edit", "Visit", new { id=item.Id }) 
+            </td>
         </tr>
 }
     </tbody>

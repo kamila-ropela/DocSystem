@@ -7,6 +7,27 @@ namespace DocSystem.Controllers
 {
     public class DoctorController : Controller
     {
+
+
+        public IActionResult AddDescription() {
+            return View(); 
+        }
+
+
+        public IActionResult MedicalDescription()
+        {
+            DateTime date = DateTime.Now;
+            MedicalDescription des = new MedicalDescription() { Id = 1, Date = date, Description = "", DoctorId = 1, PatientId = 1, Type = "1" };
+            List<MedicalDescription> list = new List<MedicalDescription>();
+            list.Add(des);
+            return View(list);
+        }
+
+        public IActionResult Visit(int id)
+        {
+            return View();
+        }
+
         public IActionResult DoctorView()
         {
             Patient patient = new Patient() { Id=1, Name="Ola", Surname="jhdhf", Address="jghvgfh", Pesel=6845264};
@@ -19,7 +40,7 @@ namespace DocSystem.Controllers
             List<Prescription> prescriptions = new List<Prescription>();
             prescriptions.Add(prescription);
 
-            Test test = new Test() { Date = date, Description = "", Type="",Value="" ,DoctorId = 11, Id = 99, PatientId = 11 };
+            Test test = new Test() { Date = date, Description = "",DoctorId = 11, Id = 99, PatientId = 11 };
             List<Test> tests = new List<Test>();
             tests.Add(test);
 

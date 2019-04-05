@@ -14,22 +14,14 @@
 
     </p>
 </form>
-<br>
 
 @Html.Partial("PatientInfo", ViewData["data"])
-
-<div>
-<button class="btn btn-primary">Add description</button>
-<button class="btn btn-primary">Add documentation</button>
-</br>
-</br>
-<button class="btn btn-primary">Add visit</button>
-<button class="btn btn-primary">Add prescription</button>
-<button class="btn btn-primary">Add sick leave</button>
-</div>
+<br>
+<button class="btn btn-primary">View descriptions</button>
 
 
 <h1>Visits</h1>
+<button class="btn btn-primary">Add visit</button>
 @Html.Partial("PatientVisits", ViewData["visits"])
 
 <h1>Docs</h1>

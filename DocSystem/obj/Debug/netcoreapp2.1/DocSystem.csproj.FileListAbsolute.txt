@@ -62,3 +62,9 @@ C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\D
 C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientPrescription.g.cshtml.cs
 C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientTests.g.cshtml.cs
 C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\PatientVisits.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Lab\Test.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Patient\PatientView.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\VisitInfo.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\Visit.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\MedicalDescription.g.cshtml.cs
+C:\Users\pance\Desktop\DocSystem\DocSystem\obj\Debug\netcoreapp2.1\Razor\Views\Doctor\AddDescription.g.cshtml.cs

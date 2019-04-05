@@ -1,4 +1,11 @@
-﻿@model IEnumerable<DocSystem.Models.Test>
+﻿@model IEnumerable<DocSystem.Models.MedicalDescription>
+
+@{
+    ViewData["Title"] = "MedicalDescription";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Medical Descriptions</h2>
 
 <table class="table">
     <thead>
@@ -7,10 +14,7 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PatientId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DoctorId)
+                @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -18,7 +22,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -28,10 +31,7 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoctorId)
+                @Html.DisplayFor(modelItem => item.Type)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Description)

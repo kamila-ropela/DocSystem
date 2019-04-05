@@ -12682,23 +12682,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\marik\\.nuget\\packages\\": {},
+    "C:\\Users\\pance\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\marik\\Documents\\GitHub\\DocSystem\\DocSystem\\DocSystem.csproj",
+      "projectUniqueName": "C:\\Users\\pance\\Desktop\\DocSystem\\DocSystem\\DocSystem.csproj",
       "projectName": "DocSystem",
-      "projectPath": "C:\\Users\\marik\\Documents\\GitHub\\DocSystem\\DocSystem\\DocSystem.csproj",
-      "packagesPath": "C:\\Users\\marik\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\marik\\Documents\\GitHub\\DocSystem\\DocSystem\\obj\\",
+      "projectPath": "C:\\Users\\pance\\Desktop\\DocSystem\\DocSystem\\DocSystem.csproj",
+      "packagesPath": "C:\\Users\\pance\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pance\\Desktop\\DocSystem\\DocSystem\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\marik\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pance\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
