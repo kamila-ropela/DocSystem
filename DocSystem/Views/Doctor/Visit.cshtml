@@ -55,9 +55,9 @@
 </div>
 <div>
     <div>
-        <button class="btn btn-primary">Add description</button>
-        <button class="btn btn-primary">Add documentation</button>
-        <button class="btn btn-primary">Add prescription</button>
-        <button class="btn btn-primary">Add sick leave</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDescription", "Doctor") + "'");">Add description</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDocumentationView", "Doctor") + "'");">Add documentation</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorPrescription", "Doctor") + "'");">Add prescription</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorSickLeave", "Doctor") + "'");">Add sick leave</button>
     </div>
 </div>
