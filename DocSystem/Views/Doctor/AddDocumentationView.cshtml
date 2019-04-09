@@ -1,0 +1,50 @@
+﻿@model DocSystem.Models.Documentation
+
+@{
+    ViewData["Title"] = "Add documentation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AddDocumentationView</h2>
+
+<h4>Documentation</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddDocumentationView">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <b>Patient Id</b>
+                <input asp-for="PatientId" class="form-control" />
+                <span asp-validation-for="PatientId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b>Doctor Id</b>
+                <input asp-for="DoctorId" class="form-control" />
+                <span asp-validation-for="DoctorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b>Disease</b>
+                <input asp-for="Disease" class="form-control" />
+                <span asp-validation-for="Disease" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <b>Date</b>
+                <input asp-for="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

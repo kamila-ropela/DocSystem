@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace DocSystem.Models
 {
-    public class Visit
+    public class MedicalDescription
     {
         public int Id { get; set; }
         [DisplayName("Id pacjenta")]
@@ -12,10 +12,8 @@ namespace DocSystem.Models
         public int DoctorId { get; set; }
         [DisplayName("Typ")]
         public string Type { get; set; }
-        [DisplayName("Doktor")]
-        public string Doctor { get; set; }
-        [DisplayName("Status")]
-        public string Status { get; set; }
+        [DisplayName("Opis")]
+        public string Description { get; set; }
         [DisplayName("Data")]
         public DateTime Date { get; set; }
     }

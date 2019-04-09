@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "DoctorView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<br>
+<br>
+
+<form asp-controller="Patients" asp-action="Index">
+    <p>
+        Type PESEL or surname: <input type="text" name="SearchString">
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </p>
+</form>
+
+@Html.Partial("PatientInfo", ViewData["data"])
+<br>
+<button class="btn btn-primary">View descriptions</button>
+
+
+<h1>Visits</h1>
+<button class="btn btn-primary">Add visit</button>
+@Html.Partial("PatientVisits", ViewData["visits"])
+
+<h1>Docs</h1>
+@Html.Partial("PatientDoc", ViewData["docs"])
+
+<h1>Tests</h1>
+@Html.Partial("PatientTests", ViewData["tests"])
+
+<h1>Prescription</h1>
+@Html.Partial("PatientPrescription", ViewData["prescript"])
