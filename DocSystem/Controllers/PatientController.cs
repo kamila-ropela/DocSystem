@@ -8,11 +8,17 @@ namespace Patients.Controllers
 {
     public class PatientController : Controller
     {
-        
-
-
         public ActionResult PatientView()
         {
+            ViewData["PatientName"] = new Patient() { Id = 2, Name = "Hania", Surname = "fgf", Pesel = 787879, Address = "Gdansk" };
+
+            ViewData["medicalDescription"] = new List<MedicalDescription>() { new MedicalDescription { Date = DateTime.Now, PatientId = 9, DoctorId = 9, Description= "", Type="", Id=0 } };
+            ViewData["documentation"] = new List<Documentation>() {new Documentation{ Id = 0, DoctorId = 0, PatientId = 9, Disease="", Date = DateTime.Now}};
+            ViewData["Tests"] = new List<Test>() { new Test{ Id=9, DoctorId=0, PatientId=9, Date = DateTime.Now, Description=""} };
+
+            ViewData["sickLeaveData"] = SickLeaveTable.GetData(); ;
+            ViewData["prescriptioneData"] = PrescriptionTable.GetData();
+            ViewData["visitData"] = VisitTable.GetData();
             return View();
         }
         public ActionResult Visits()
@@ -40,14 +46,6 @@ namespace Patients.Controllers
             List<Result> list = new List<Result>();
             list.Add(res);
             return View(list);
-        }
-
-        public ActionResult PatientInfo()
-        {
-            ViewData["sickLeaveData"] = SickLeaveTable.GetData(); ;
-            ViewData["prescriptioneData"] = PrescriptionTable.GetData();
-            ViewData["visitData"] = VisitTable.GetData();
-            return View(); 
         }
     }
 }

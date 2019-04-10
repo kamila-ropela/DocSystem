@@ -7,8 +7,6 @@ namespace DocSystem.Controllers
 {
     public class DoctorController : Controller
     {
-
-
         public IActionResult AddDescription() {
             return View(); 
         }
@@ -49,11 +47,16 @@ namespace DocSystem.Controllers
             List<Documentation> docs = new List<Documentation>();
             docs.Add(doc);
 
+            MedicalDescription des = new MedicalDescription() { Id = 1, Date = date, Description = "", DoctorId = 1, PatientId = 1, Type = "1" };
+            List<MedicalDescription> list = new List<MedicalDescription>();
+            list.Add(des);
+
             ViewData["data"] = patient;
             ViewData["docs"] = docs;
             ViewData["visits"] = visits;
             ViewData["prescript"] = prescriptions;
-            ViewData["tests"] = tests; 
+            ViewData["tests"] = tests;
+            ViewData["medicalDescriptionData"] = list;
             return View();
         }
 
@@ -76,6 +79,15 @@ namespace DocSystem.Controllers
         public ActionResult AddDocumentationView()
         {
             return View();
+        }
+
+        public IActionResult Results(int id)
+        {
+            DateTime date = DateTime.Now;
+            Result res = new Result { Id = 1, Name = "", TestId = 111, Unit = "mm", Value = 100 };
+            List<Result> list = new List<Result>();
+            list.Add(res);
+            return View(list);
         }
     }
 }

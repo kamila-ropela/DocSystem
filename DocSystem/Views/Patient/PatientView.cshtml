@@ -4,22 +4,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-
-
 @Html.Partial("PatientName", ViewData["PatientName"])
-<br />
-
 
 @Html.Partial("VisitList", ViewData["visitData"])
-<br />
-
-@Html.Partial("PrescriptionList", ViewData["Medicaments"])
-<br />
-
-<h2>Tests</h2>
-
+@Html.Partial("PrescriptionList", ViewData["prescriptioneData"])
 @Html.Partial("PatientTests", ViewData["Tests"])
+
+@Html.Partial("SickLeaveList", ViewData["sickLeaveData"])
+@Html.Partial("MedicalDescriptions", ViewData["medicalDescription"])
+@Html.Partial("DocumentationList", ViewData["documentation"])
 
 
 

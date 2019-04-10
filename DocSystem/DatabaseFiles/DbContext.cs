@@ -101,7 +101,7 @@ namespace DocSystem.DatabaseFiles
                             Id = Convert.ToInt32(reader["Id"]),
                             Name = reader["Name"].ToString(),
                             Surname = reader["Surname"].ToString(),
-                            Specialization = reader["Address"].ToString()
+                            Specialization = reader["Specialization"].ToString()
                         });
                     }
                 }

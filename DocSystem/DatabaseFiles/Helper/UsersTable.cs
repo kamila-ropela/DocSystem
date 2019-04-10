@@ -15,8 +15,8 @@ namespace DocSystem.DatabaseFiles.Helper
         public static List<User> GetDataByLogin(string login)
         {
             return Properties.dbContext.GetUserDb($@"SELECT *
-                                                    FROM Users
-                                                    WHERE Login = '{login}'");
+                                                     FROM Users
+                                                     WHERE Login = '{login}'");
         }
 
         public static void ChangePassword(string newPassword)
@@ -35,12 +35,12 @@ namespace DocSystem.DatabaseFiles.Helper
             var doctors = Properties.dbContext.GetDoctorDb($@"SELECT *
                                                               FROM Doctor
                                                               WHERE Name = '{name}' AND 
-                                                              WHERE Surname = '{surname}'");
+                                                                    Surname = '{surname}'");
 
             var patients = Properties.dbContext.GetPatientDb($@"SELECT *
                                                                 FROM Patient
                                                                 WHERE Name = '{name}' AND 
-                                                                WHERE Surname = '{surname}'");
+                                                                      Surname = '{surname}'");
 
             if(!(doctors.Count == 0 && patients.Count == 0))
             {
