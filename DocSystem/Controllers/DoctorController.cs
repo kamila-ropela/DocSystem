@@ -1,4 +1,5 @@
-﻿using DocSystem.Models;
+﻿using DocSystem.DatabaseFiles.Helper;
+using DocSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,29 @@ namespace DocSystem.Controllers
 
         public IActionResult Visit(int id)
         {
-            return View();
+            var data = VisitTable.GetDataById(id);
+
+            if (data.Count == 0)
+                throw new ArgumentNullException();
+
+            Visit visitData = new Visit()
+            {
+                PatientName = data[0].PatientName,
+                DoctorName = data[0].DoctorName,
+                Doctor = data[0].Doctor,
+                Status = data[0].Status,
+                Type = data[0].Type,
+                Date = data[0].Date
+            };
+
+            return View(visitData);
         }
 
         public IActionResult DoctorView()
         {
             Patient patient = new Patient() { Id=1, Name="Ola", Surname="jhdhf", Address="jghvgfh", Pesel=6845264};
             DateTime date = DateTime.Now; 
-            Visit visit = new Visit() { Date= date, Doctor = "", DoctorId = 11, Id = 99, PatientId = 11, Status = "a", Type = "a" };
+            Visit visit = new Visit() { Date= date, Doctor = "", DoctorName = "11", Id = 1, PatientName = "11", Status = "a", Type = "a" };
             List<Visit> visits = new List<Visit>();
             visits.Add(visit);
 

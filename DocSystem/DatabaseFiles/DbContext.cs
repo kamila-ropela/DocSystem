@@ -263,8 +263,8 @@ namespace DocSystem.DatabaseFiles
                         list.Add(new Visit()
                         {
                             Id = Convert.ToInt32(reader["Id"]),
-                            PatientId = Convert.ToInt32(reader["PatientId"]),
-                            DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                            PatientName = reader["PatientName"].ToString(),
+                            DoctorName = reader["DoctorName"].ToString(),
                             Type = reader["Type"].ToString(),
                             Doctor = reader["Doctor"].ToString(),
                             Status = reader["Status"].ToString(),
