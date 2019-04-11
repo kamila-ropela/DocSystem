@@ -1,14 +1,13 @@
-﻿using System.ComponentModel;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DocSystem.Models
 {
     public class User
     {
-        [DisplayName("Login")]
+        [Required(ErrorMessage = "This field is required")]
         public string Login { get; set; }
-        [DisplayName("Haslo")]
+        [Required(ErrorMessage = "This field is required")]
         public string Password { get; set; }
-        [DisplayName("Rola")]
         public string Role { get; set; }
     }
 }

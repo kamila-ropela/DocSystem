@@ -4,28 +4,22 @@
     ViewData["Title"] = "Visit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<h2>Visit</h2>
 
-<div>
-    <h4>Visit</h4>
+<div>   
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Id)
+            @Html.DisplayNameFor(model => model.PatientName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.Id)
+            @Html.DisplayFor(model => model.PatientName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.PatientId)
+            @Html.DisplayNameFor(model => model.DoctorName)
         </dt>
         <dd>
-            @Html.DisplayFor(model => model.PatientId)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.DoctorId)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.DoctorId)
+            @Html.DisplayFor(model => model.DoctorName)
         </dd>
         <dt>
             @Html.DisplayNameFor(model => model.Type)
@@ -55,9 +49,9 @@
 </div>
 <div>
     <div>
-        <button class="btn btn-primary">Add description</button>
-        <button class="btn btn-primary">Add documentation</button>
-        <button class="btn btn-primary">Add prescription</button>
-        <button class="btn btn-primary">Add sick leave</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDescription", "Doctor") + "'");">Add description</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDocumentationView", "Doctor") + "'");">Add documentation</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorPrescription", "Doctor") + "'");">Add prescription</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorSickLeave", "Doctor") + "'");">Add sick leave</button>
     </div>
 </div>

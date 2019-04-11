@@ -21,7 +21,8 @@
 
 
 <h1>Visits</h1>
-<button class="btn btn-primary">Add visit</button>
+<button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorVisit", "Doctor") + "'");">Add visit</button>
+
 @Html.Partial("PatientVisits", ViewData["visits"])
 
 <h1>Docs</h1>
@@ -32,3 +33,6 @@
 
 <h1>Prescription</h1>
 @Html.Partial("PatientPrescription", ViewData["prescript"])
+
+<h1>Medical description</h1>
+@Html.Partial("MedicalDescription", ViewData["medicalDescriptionData"])

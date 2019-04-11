@@ -12,6 +12,7 @@ namespace DocSystem.Controllers
         public IActionResult LogIn()
         {
             //UsersTable.ChangePassword(HashPassword("test", 10));
+            Properties.dbContext = HttpContext.RequestServices.GetService(typeof(DbContext)) as DbContext;
             return View();
         }
 
@@ -28,7 +29,10 @@ namespace DocSystem.Controllers
                     var data = GetIdAndRole(logins[0].Login);
                     Properties.UserId = data.Item1;
                     Properties.UserRole = data.Item2;
-                    return null;// RedirectToAction(Help.LastAction, Help.LastController);
+                    if (data.Item2 == 1)
+                        return RedirectToAction("DoctorView", "Doctor");
+                    else
+                        return RedirectToAction("PatientView", "Patient");
                 }
                 else
                 {
@@ -44,13 +48,13 @@ namespace DocSystem.Controllers
         public static (int, int) GetIdAndRole(string login)
         {
             var name = login.Substring(0, login.Length - login.IndexOf('.'));
-            var surname = login.Substring(login.IndexOf('.'), login.Length);
+            var surname = login.Substring(login.IndexOf('.') + 1, login.Length - login.IndexOf('.') - 1);
             var data = UsersTable.GetDataByNameAndSurname(name, surname);
 
             return (data.Item1, data.Item2);
         }
 
-        public bool CheckIfLoginAndPasswordAreCorrect(User model)
+        public static bool CheckIfLoginAndPasswordAreCorrect(User model)
         {
             var logins = UsersTable.GetDataByLogin( model.Login);
             if (logins == null)
