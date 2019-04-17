@@ -5,6 +5,7 @@
 }
 
 
+<h1>Tests</h1>
 <table class="table">
     <thead>
         <tr>
@@ -26,8 +27,8 @@
             <th></th>
         </tr>
     </thead>
-    
-    @*<tbody>
+
+    <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -46,8 +47,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
-               
+                <td>
+                    @Html.ActionLink("Show results", "Results", new { id = item.Id })
+                </td>
             </tr>
         }
-    </tbody>*@
+    </tbody>
 </table>

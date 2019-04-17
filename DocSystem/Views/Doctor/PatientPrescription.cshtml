@@ -1,10 +1,4 @@
-﻿@model IEnumerable<DocSystem.Models.Visit>
-
-@{
-    ViewData["Title"] = "VisitList";
-}
-
-<h2>VisitList</h2>
+﻿@model IEnumerable<DocSystem.Models.Prescription>
 
 <table class="table">
     <thead>
@@ -13,19 +7,16 @@
                 @Html.DisplayNameFor(model => model.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PatientName)
+                @Html.DisplayNameFor(model => model.PatientId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DoctorName)
+                @Html.DisplayNameFor(model => model.DoctorId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.Medicine)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Doctor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Date)
@@ -40,19 +31,16 @@
                 @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PatientName)
+                @Html.DisplayFor(modelItem => item.PatientId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DoctorName)
+                @Html.DisplayFor(modelItem => item.DoctorId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Type)
+                @Html.DisplayFor(modelItem => item.Medicine)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Doctor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
+                @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)

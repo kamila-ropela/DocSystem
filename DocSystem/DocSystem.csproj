@@ -15,4 +15,13 @@
 	<Folder Include="Views\Lab\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Content Update="Views\Doctor\Results.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+    <Content Update="Views\Shared\_Layout2.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
+
 </Project>

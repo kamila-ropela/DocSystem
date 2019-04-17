@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocSystem.Models
 {
@@ -6,10 +7,10 @@ namespace DocSystem.Models
     {
         public int Id { get; set; }
 
-        public int PatientId { get; set; }
+        public string PatientName { get; set; }
 
-        public int DoctorId { get; set; }
-
+        public string DoctorName { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public string Type { get; set; }
 
         public string Doctor { get; set; }
