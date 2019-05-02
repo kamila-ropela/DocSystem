@@ -9,9 +9,15 @@ namespace DocSystem.Controllers
 {
     public class DoctorController : Controller
     {
+        [HttpPost]
+        public ActionResult AddDescriptionAction([FromForm]string description)
+        {
+            if (!description.Length.Equals("")) { 
+            }
+            return View(); 
+        }
 
-
-        public IActionResult DoctorIndex()
+            public IActionResult DoctorIndex()
         {
                 return View();
            
