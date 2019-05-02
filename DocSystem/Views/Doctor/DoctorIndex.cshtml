@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewData["Title"] = "DoctorIndex";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Welcome!</h2>
+<form asp-action="DoctorIndex">
+    <p>
+        <p>Type PESEL or surname: </p>
+        <input type="text" name="SearchString">
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </p>
+</form>

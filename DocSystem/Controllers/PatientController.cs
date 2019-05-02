@@ -12,9 +12,9 @@ namespace Patients.Controllers
         {
             ViewData["PatientName"] = new Patient() { Id = 2, Name = "Hania", Surname = "fgf", Pesel = 787879, Address = "Gdansk" };
 
-            ViewData["medicalDescription"] = new List<MedicalDescription>() { new MedicalDescription { Date = DateTime.Now, PatientId = 9, DoctorId = 9, Description= "", Type="", Id=0 } };
-            ViewData["documentation"] = new List<Documentation>() {new Documentation{ Id = 0, DoctorId = 0, PatientId = 9, Disease="", Date = DateTime.Now}};
-            ViewData["Tests"] = new List<Test>() { new Test{ Id=9, DoctorId=0, PatientId=9, Date = DateTime.Now, Description=""} };
+            ViewData["medicalDescription"] = new List<MedicalDescription>() { new MedicalDescription { Date = DateTime.Now, DoctorName="", Description= "", Type="", Id=0 } };
+            ViewData["documentation"] = new List<Documentation>() {new Documentation{ Id = 0, DoctorName = "", PatientId = 9, Disease="", Date = DateTime.Now}};
+            ViewData["Tests"] = new List<Test>() { new Test{ Id=9, DoctorName="", PatientId=9, Date = DateTime.Now, Description=""} };
 
             ViewData["sickLeaveData"] = SickLeaveTable.GetData(); ;
             ViewData["prescriptioneData"] = PrescriptionTable.GetData();
@@ -33,7 +33,7 @@ namespace Patients.Controllers
         public ActionResult PatientTests()
         {
             DateTime date = DateTime.Now;
-            Test test = new Test { Id = 1, Date = date, Description = "", DoctorId = 1, PatientId = 1};
+            Test test = new Test { Id = 1, Date = date, Description = "", DoctorName = "", PatientId = 1};
             List<Test> list = new List<Test>();
             list.Add(test);
             return View(list);
