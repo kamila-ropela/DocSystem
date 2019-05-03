@@ -126,7 +126,7 @@ namespace DocSystem.DatabaseFiles
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             PatientId = Convert.ToInt32(reader["PatientId"]),
-                            DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                            DoctorName = reader["DoctorName"].ToString(),
                             Description = reader["Description"].ToString(),
                             Date = Convert.ToDateTime(reader["Date"])
                         });
@@ -153,7 +153,8 @@ namespace DocSystem.DatabaseFiles
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             PatientId = Convert.ToInt32(reader["PatientId"]),
-                            DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                            DoctorName = reader["Doctor Name"].ToString(),
+                            Disease = reader["Disease"].ToString(),
                             Date = Convert.ToDateTime(reader["Address"])
                         });
                     }
@@ -179,7 +180,7 @@ namespace DocSystem.DatabaseFiles
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             PatientId = Convert.ToInt32(reader["PatientId"]),
-                            DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                            DoctorName = reader["DoctorName"].ToString(),
                             Medicine = reader["Medicine"].ToString(),
                             Description = reader["Description"].ToString(),
                             Refund = Convert.ToInt32(reader["Refund"]),
@@ -235,8 +236,7 @@ namespace DocSystem.DatabaseFiles
                         list.Add(new MedicalDescription()
                         {
                             Id = Convert.ToInt32(reader["Id"]),
-                            PatientId = Convert.ToInt32(reader["PatientId"]),
-                            DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                            DoctorName = reader["DoctorName"].ToString(),
                             Type = reader["Type"].ToString(),
                             Description = reader["Description"].ToString(),
                             Date = Convert.ToDateTime(reader["Date"])

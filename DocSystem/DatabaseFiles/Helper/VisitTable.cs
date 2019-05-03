@@ -33,5 +33,20 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      INNER JOIN Doctor ON Visit.DoctorId = Doctor.Id
                                                      WHERE Visit.Id = {id}");
         }
+
+        public static List<Visit> GetDataByPatientId(int id)
+        {
+            return Properties.dbContext.GetVisitDb($@"SELECT Visit.Id,
+                                                            Concat(Patient.Name, ' ', Patient.Surname) AS PatientName,
+                                                            Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                            Visit.Type,
+                                                            Visit.Doctor,
+                                                            Visit.Status,
+                                                            Visit.Date
+                                                     FROM Visit
+                                                     INNER JOIN Patient ON Visit.PatientId = Patient.Id
+                                                     INNER JOIN Doctor ON Visit.DoctorId = Doctor.Id
+                                                     WHERE Visit.PatientId = {id}");
+        }
     }
 }

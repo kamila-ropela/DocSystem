@@ -4,19 +4,17 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<br>
-<br>
-
-<form asp-controller="Patients" asp-action="Index">
-    <p>
-        Type PESEL or surname: <input type="text" name="SearchString">
-        <button type="submit" class="btn btn-primary">Submit</button>
-
-    </p>
-</form>
 
 @Html.Partial("PatientInfo", ViewData["data"])
 <br>
+<form asp-action="DoctorIndex">
+    <p>
+    <p>Type PESEL or surname: </p>
+    <input type="text" name="SearchString">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </p>
+</form>
+
 <button class="btn btn-primary">View descriptions</button>
 
 

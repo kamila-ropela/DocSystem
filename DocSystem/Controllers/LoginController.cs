@@ -11,8 +11,8 @@ namespace DocSystem.Controllers
     {
         public IActionResult LogIn()
         {
-            //UsersTable.ChangePassword(HashPassword("test", 10));
             Properties.dbContext = HttpContext.RequestServices.GetService(typeof(DbContext)) as DbContext;
+            //UsersTable.ChangePassword(HashPassword("test", 10));
             return View();
         }
 
