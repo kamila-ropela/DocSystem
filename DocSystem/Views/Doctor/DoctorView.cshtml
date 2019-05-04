@@ -5,75 +5,32 @@
 }
 
 
-<form action="">
-    <datalist id="patients"></datalist>
-    <text> Type surname or PESEL to search for patient... </text></br>
-    <input type="text" name="patients" list="patients"> 
-    <button type="submit"  class="btn btn-primary">Submit</button>
+@Html.Partial("PatientInfo", ViewData["data"])
+<br>
+<form asp-action="DoctorIndex">
+    <p>
+    <p>Type PESEL or surname: </p>
+    <input type="text" name="SearchString">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </p>
 </form>
 
+<button class="btn btn-primary">View descriptions</button>
 
-<h2>Patient Info</h2>
-<ul class="list-group">
-    <li class="list-group-item">Name</li>
-    <li class="list-group-item">Surname</li>
-    <li class="list-group-item">PESEL</li>
-</ul>
 
-<h2> Visits </h2>
-<table class="table table-bordered">
-    <thead class="thead">
-        <tr>
-            <th>Doctor</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Date</th>
-        </tr>
-    <thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+<h1>Visits</h1>
+<button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorVisit", "Doctor") + "'");">Add visit</button>
 
-<h2> Tests </h2>
-<table class="table table-bordered">
-    <thead class="thead">
-        <tr>
-            <th>Type</th>
-            <th>Value</th>
-            <th>Description</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    </tbody>
-</table>
+@Html.Partial("PatientVisits", ViewData["visits"])
 
-<h2> Medicaments </h2>
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Medicine</th>
-            <th>Description</th>
-            <th>Date</th>
-        </tr>
-    </thead>
-    </tbody>
-    <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-    </tr>
-    </tbody>
-</table>
+<h1>Docs</h1>
+@Html.Partial("PatientDoc", ViewData["docs"])
+
+<h1>Tests</h1>
+@Html.Partial("PatientTests", ViewData["tests"])
+
+<h1>Prescription</h1>
+@Html.Partial("PatientPrescription", ViewData["prescript"])
+
+<h1>Medical description</h1>
+@Html.Partial("MedicalDescription", ViewData["medicalDescriptionData"])

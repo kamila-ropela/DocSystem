@@ -5,6 +5,7 @@
 }
 
 
+<h1>Tests</h1>
 <table class="table">
     <thead>
         <tr>
@@ -15,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.PatientId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DoctorId)
+                @Html.DisplayNameFor(model => model.DoctorName)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
@@ -26,8 +27,8 @@
             <th></th>
         </tr>
     </thead>
-    
-    @*<tbody>
+
+    <tbody>
         @foreach (var item in Model)
         {
             <tr>
@@ -38,7 +39,7 @@
                     @Html.DisplayFor(modelItem => item.PatientId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.DoctorId)
+                    @Html.DisplayFor(modelItem => item.DoctorName)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
@@ -46,8 +47,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
-               
+                <td>
+                    @Html.ActionLink("Show results", "Results", new { id = item.Id })
+                </td>
             </tr>
         }
-    </tbody>*@
+    </tbody>
 </table>

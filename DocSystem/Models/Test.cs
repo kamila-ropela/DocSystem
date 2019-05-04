@@ -9,9 +9,9 @@ namespace DocSystem.Models
 
         public int PatientId { get; set; }
 
-        public int DoctorId { get; set; }
+        public string DoctorName { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "This field is required")]
         public string Description { get; set; }
 
         public DateTime Date { get; set; }

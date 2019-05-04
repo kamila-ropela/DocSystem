@@ -26,23 +26,6 @@
                 </button>
                 <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">DocSystem</a>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @{
-                        if (DocSystem.DatabaseFiles.Properties.UserRole == 1)
-                        {
-                            <li><a asp-area="" asp-controller="Doctor" asp-action="DoctorView">Home</a></li>
-                            <li><a asp-area="" asp-controller="Lab" asp-action="Test">Lab</a></li>
-                        }
-                        else
-                        {
-                            <li><a asp-area="" asp-controller="Patient" asp-action="PatientView">Home</a></li>
-                            <li><a asp-area="" asp-controller="Patient" asp-action="PatientTests">Results</a></li>
-                            <li><a asp-area="" asp-controller="Patient" asp-action="Visits">Visit progress</a></li>
-                        }
-                    }
-                </ul>
-            </div>
         </div>
     </nav>
 

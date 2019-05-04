@@ -1,20 +1,8 @@
 ﻿@model IEnumerable<DocSystem.Models.Visit>
 
-@{
-    ViewData["Title"] = "VisitList";
-}
-
-<h2>VisitList</h2>
-
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientName)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.DoctorName)
             </th>
@@ -37,12 +25,6 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientName)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.DoctorName)
             </td>
             <td>
@@ -56,6 +38,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Visit", new { id=item.Id }) 
             </td>
         </tr>
 }

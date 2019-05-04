@@ -1,19 +1,10 @@
 ﻿@model IEnumerable<DocSystem.Models.Prescription>
 
-@{
-    ViewData["Title"] = "PrescriptionList";
-}
-
-<h2>PrescriptionList</h2>
-
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.DoctorName)
@@ -27,9 +18,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Refund)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -38,9 +26,6 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientId)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DoctorName)
@@ -53,9 +38,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Refund)
             </td>
         </tr>
 }

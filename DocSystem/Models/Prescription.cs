@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace DocSystem.Models
 {
@@ -8,8 +9,8 @@ namespace DocSystem.Models
 
         public int PatientId { get; set; }
 
-        public int DoctorId { get; set; }
-
+        public string DoctorName { get; set; }
+        [Required(ErrorMessage = "This field is required")]
         public string Medicine { get; set; }
 
         public string Description { get; set; }
