@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "ChartView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <canvas id="myChart"></canvas>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+<script>
+    $.ajax({
+        type: "POST",
+        url: "/Doctor/NewChart",
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function renderChart(chData) {
+            var name = "@ViewBag.name";
+            var aData = chData;
+            var aLabels = aData[1];
+            var aDatasets1 = aData[0];
+            var ctx = document.getElementById("myChart").getContext('2d');
+            var myChart = new Chart(ctx,
+                {
+                    type: 'line',
+                    data: {
+                        labels: aLabels,
+                        datasets: [
+                            {
+                                label: name,
+                                borderColor: "#99ccff",
+                                backgroundColor: "##99ccff",
+                                data: aDatasets1,
+                                fill: false,
+                            }
+                        ],
+                        fill: false
+                    }
+                });
+        }
+    });
+</script>
+
