@@ -153,7 +153,7 @@ namespace DocSystem.DatabaseFiles
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             PatientId = Convert.ToInt32(reader["PatientId"]),
-                            DoctorName = reader["Doctor Name"].ToString(),
+                            DoctorName = reader["DoctorName"].ToString(),
                             Disease = reader["Disease"].ToString(),
                             Date = Convert.ToDateTime(reader["Address"])
                         });
@@ -293,9 +293,9 @@ namespace DocSystem.DatabaseFiles
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             TestId = Convert.ToInt32(reader["TestId"]),
-                            Value = Convert.ToDouble(reader["DoctorId"]),
-                            Name = reader["Type"].ToString(),
-                            Unit = reader["Doctor"].ToString()
+                            Value = Convert.ToDouble(reader["Value"]),
+                            Name = reader["Name"].ToString(),
+                            Unit = reader["Unit"].ToString()
                         });
                     }
                 }

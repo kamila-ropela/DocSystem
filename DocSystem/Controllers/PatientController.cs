@@ -3,11 +3,16 @@ using DocSystem.DatabaseFiles.Helper;
 using System;
 using DocSystem.Models;
 using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using DocSystem.DatabaseFiles;
 
 namespace Patients.Controllers
 {
     public class PatientController : Controller
     {
+        public static string nameOfTest;
+
         public ActionResult PatientView()
         {
             ViewData["PatientName"] = new Patient() { Id = 2, Name = "Hania", Surname = "fgf", Pesel = 787879, Address = "Gdansk" };
@@ -42,10 +47,52 @@ namespace Patients.Controllers
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name="",TestId=111, Unit="mm",Value=100};
+            Result res = new Result { Id = 1, Name="H2O",TestId=111, Unit="mm",Value=100};
             List<Result> list = new List<Result>();
             list.Add(res);
             return View(list);
+        }
+        public ActionResult ChartView(string name)
+        {
+            nameOfTest = name;
+            ViewBag.name = name;
+
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult NewChart()
+        {
+            List<object> data = new List<object>();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Value", System.Type.GetType("System.Double"));
+            dt.Columns.Add("Data", System.Type.GetType("System.String"));
+            DataRow dr;
+            
+            var dataTest = TestTable.GetDataByPatientId(Properties.UserId);
+            foreach (var test in dataTest)
+            {
+                var dataResult = ResultTable.GetDataByTestIdAndName(test.Id, nameOfTest);
+                if (dataResult.Count != 0)
+                {
+                    for (int i = 0; i < dataResult.Count(); i++)
+                    {
+                        dr = dt.NewRow();
+                        dr["Value"] = dataResult[i].Value;
+                        dr["Data"] = test.Date.ToString("dd.MM.yyyy");
+                        dt.Rows.Add(dr);
+                    }                    
+                }
+            }
+
+            foreach (DataColumn dc in dt.Columns)
+            {
+                List<object> x = new List<object>();
+                x = (from DataRow drr in dt.Rows select drr[dc.ColumnName]).ToList();
+                data.Add(x);
+            }
+
+            return Json(data);
         }
     }
 }

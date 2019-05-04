@@ -4,11 +4,16 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Data;
+using System.Linq;
 
 namespace DocSystem.Controllers
 {
     public class DoctorController : Controller
     {
+        public static int patientId;
+        public static string nameOfTest;
+
         [HttpPost]
         public ActionResult AddDescriptionAction([FromForm]string description)
         {
@@ -78,6 +83,8 @@ namespace DocSystem.Controllers
 
         public IActionResult DoctorView(Patient patient)
         {
+            patientId = patient.Id;
+
             List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
             List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
             List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
@@ -117,10 +124,50 @@ namespace DocSystem.Controllers
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name = "", TestId = 111, Unit = "mm", Value = 100 };
+            Result res = new Result { Id = 1, Name = "H2O", TestId = 111, Unit = "mm", Value = 100 };
             List<Result> list = new List<Result>();
             list.Add(res);
             return View(list);
+        }
+
+        public ActionResult ChartView(string name)
+        {
+            nameOfTest = name;
+            ViewBag.name = name;
+
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult NewChart()
+        {
+            List<object> data = new List<object>();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Value", System.Type.GetType("System.Double"));
+            dt.Columns.Add("Data", System.Type.GetType("System.String"));
+            DataRow dr;
+
+            var dataTest = TestTable.GetDataByPatientId(patientId);
+            foreach (var test in dataTest)
+            {
+                var dataResult = ResultTable.GetDataByTestIdAndName(test.Id, nameOfTest);
+                if(dataResult.Count != 0)
+                {
+                    dr = dt.NewRow();
+                    dr["Value"] = dataResult[0].Value;
+                    dr["Data"] = test.Date.ToString("dd.MM.yyyy");
+                    dt.Rows.Add(dr);
+                }
+            }
+
+            foreach (DataColumn dc in dt.Columns)
+            {
+                List<object> x = new List<object>();
+                x = (from DataRow drr in dt.Rows select drr[dc.ColumnName]).ToList();
+                data.Add(x);
+            }
+
+            return Json(data);
         }
     }
 }
