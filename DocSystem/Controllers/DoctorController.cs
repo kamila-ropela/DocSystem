@@ -3,23 +3,61 @@ using DocSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Data;
+using System.Linq;
 
 namespace DocSystem.Controllers
 {
     public class DoctorController : Controller
     {
+        public static int patientId;
+        public static string nameOfTest;
+
+        [HttpPost]
+        public ActionResult AddDescriptionAction([FromForm]string description)
+        {
+            if (!description.Length.Equals("")) { 
+            }
+            return View(); 
+        }
+
+            public IActionResult DoctorIndex()
+        {
+                return View();
+           
+        }
+
+        [HttpPost]
+        public ActionResult DoctorIndex([FromForm]string searchString)
+        {
+            try
+            {
+                Regex regex = new Regex("[0-9]");
+                List<Patient> patient;
+                if (regex.IsMatch(searchString))
+                    patient = PatientTable.GetPatientByPesel(System.Convert.ToInt32(searchString));
+                else patient = PatientTable.GetPatientBySurname(searchString);
+
+                if (patient.Count == 0)
+                {     
+                    return View();
+                } else return RedirectToAction("DoctorView", "Doctor", patient[0]);
+            }
+            catch {
+                return View();
+            }
+        }
+
+
         public IActionResult AddDescription() {
             return View(); 
         }
 
 
-        public IActionResult MedicalDescription()
+        public IActionResult MedicalDescription(int id)
         {
-            DateTime date = DateTime.Now;
-            MedicalDescription des = new MedicalDescription() { Id = 1, Date = date, Description = "", DoctorId = 1, PatientId = 1, Type = "1" };
-            List<MedicalDescription> list = new List<MedicalDescription>();
-            list.Add(des);
-            return View(list);
+            return View();
         }
 
         public IActionResult Visit(int id)
@@ -42,30 +80,16 @@ namespace DocSystem.Controllers
             return View(visitData);
         }
 
-        public IActionResult DoctorView()
+
+        public IActionResult DoctorView(Patient patient)
         {
-            Patient patient = new Patient() { Id=1, Name="Ola", Surname="jhdhf", Address="jghvgfh", Pesel=6845264};
-            DateTime date = DateTime.Now; 
-            Visit visit = new Visit() { Date= date, Doctor = "", DoctorName = "11", Id = 1, PatientName = "11", Status = "a", Type = "a" };
-            List<Visit> visits = new List<Visit>();
-            visits.Add(visit);
+            patientId = patient.Id;
 
-            Prescription prescription = new Prescription() { Date = date, Description="",Medicine="", DoctorId = 11, Id = 99, PatientId = 11 };
-            List<Prescription> prescriptions = new List<Prescription>();
-            prescriptions.Add(prescription);
-
-            Test test = new Test() { Date = date, Description = "",DoctorId = 11, Id = 99, PatientId = 11 };
-            List<Test> tests = new List<Test>();
-            tests.Add(test);
-
-
-            Documentation doc = new Documentation() { Date = date, Disease="", DoctorId = 11, Id = 99, PatientId = 11 };
-            List<Documentation> docs = new List<Documentation>();
-            docs.Add(doc);
-
-            MedicalDescription des = new MedicalDescription() { Id = 1, Date = date, Description = "", DoctorId = 1, PatientId = 1, Type = "1" };
-            List<MedicalDescription> list = new List<MedicalDescription>();
-            list.Add(des);
+            List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
+            List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
+            List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
+            List<Documentation> docs = DocumentationTable.GetDataByPatientId(patient.Id);
+            List<MedicalDescription> list = MedicalDescriptionTable.GetDataByPatientId(patient.Id);
 
             ViewData["data"] = patient;
             ViewData["docs"] = docs;
@@ -76,9 +100,9 @@ namespace DocSystem.Controllers
             return View();
         }
 
-        public ActionResult DoctorPrescription()
+        public ActionResult DoctorPrescription(int id)
         {
-            return View();
+            return View(); 
         }
 
 
@@ -100,10 +124,50 @@ namespace DocSystem.Controllers
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name = "", TestId = 111, Unit = "mm", Value = 100 };
+            Result res = new Result { Id = 1, Name = "H2O", TestId = 111, Unit = "mm", Value = 100 };
             List<Result> list = new List<Result>();
             list.Add(res);
             return View(list);
+        }
+
+        public ActionResult ChartView(string name)
+        {
+            nameOfTest = name;
+            ViewBag.name = name;
+
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult NewChart()
+        {
+            List<object> data = new List<object>();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Value", System.Type.GetType("System.Double"));
+            dt.Columns.Add("Data", System.Type.GetType("System.String"));
+            DataRow dr;
+
+            var dataTest = TestTable.GetDataByPatientId(patientId);
+            foreach (var test in dataTest)
+            {
+                var dataResult = ResultTable.GetDataByTestIdAndName(test.Id, nameOfTest);
+                if(dataResult.Count != 0)
+                {
+                    dr = dt.NewRow();
+                    dr["Value"] = dataResult[0].Value;
+                    dr["Data"] = test.Date.ToString("dd.MM.yyyy");
+                    dt.Rows.Add(dr);
+                }
+            }
+
+            foreach (DataColumn dc in dt.Columns)
+            {
+                List<object> x = new List<object>();
+                x = (from DataRow drr in dt.Rows select drr[dc.ColumnName]).ToList();
+                data.Add(x);
+            }
+
+            return Json(data);
         }
     }
 }
