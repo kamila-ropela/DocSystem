@@ -1,4 +1,5 @@
 ﻿using DocSystem.Models;
+using System;
 using System.Collections.Generic;
 
 namespace DocSystem.DatabaseFiles.Helper
@@ -15,6 +16,18 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      FROM Documentation
                                                      INNER JOIN Doctor ON Documentation.DoctorId = Doctor.Id
                                                      WHERE Documentation.PatientId = {id}");
+        }
+        public static List<Documentation> AddDescriptionView(int patientId, int doctorId, string disease, DateTime date)
+        {
+            return Properties.dbContext.GetDocumentationDb($@"INSERT INTO Documentation (PatientId, DoctorId, Disease, Date) 
+                                                     VALUES (" + patientId + "," + doctorId + ",'" +
+                                                     disease + "','CURDATE()');");
+        }
+        public static void InsertData(int doctorId, Documentation documentation)
+        {
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO Documentation (PatientId, DoctorId, Disease, Date) 
+                                                     VALUES (" + documentation.PatientId +"," + doctorId + ",'" +
+                                                     documentation.Disease + "','" + documentation.Date + "');");
         }
     }
 }
