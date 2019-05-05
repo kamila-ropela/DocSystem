@@ -12,5 +12,17 @@ namespace DocSystem.DatabaseFiles.Helper
                                                         WHERE Name = '{name}' 
                                                         AND TestId = {testId}");
         }
+        public static List<Result> AddResults(Result result)
+        {
+            return Properties.dbContext.GetResultDb($@"INSERT INTO Result (TestId, Name, Unit, Value) 
+                                                     VALUES (" + result.TestId + ",'" + result.Name + "','" +
+                                                     result.Unit + "'," + result.Value + ");");
+        }
+        public static void InsertData(Result result)
+        {
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO Result (TestId, Name, Unit, Value) 
+                                                     VALUES (" + result.TestId + ",'" + result.Name + "','" +
+                                                     result.Unit + "'," + result.Value + ");");
+        }
     }
 }
