@@ -135,6 +135,25 @@ namespace DocSystem.Controllers
             return View();
         }
 
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorSickLeave([FromForm]SickLeave sick)
+        {
+            DateTime data = DateTime.Now;
+            sick.Date = data;
+
+            SickLeaveTable.InsertData(Properties.UserId, sick);
+
+            return View();
+        }
+
+
+
+
+
+
+
         public ActionResult AddDocumentationView()
         {
             return View();
