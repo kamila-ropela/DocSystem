@@ -12,19 +12,31 @@ namespace Patients.Controllers
     public class PatientController : Controller
     {
         public static string nameOfTest;
+         public static int patientId;
 
-        public ActionResult PatientView()
+        public ActionResult PatientView(Patient patient)
+
         {
-            ViewData["PatientName"] = new Patient() { Id = 2, Name = "Hania", Surname = "fgf", Pesel = 787879, Address = "Gdansk" };
+            patientId = patient.Id;
+            patient.Id = 2;
+            List<Patient> pat = PatientTable.GetPatientById(patient.Id);
+            List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
+            List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
+            List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
+            List<Documentation> docs = DocumentationTable.GetDataByPatientId(patient.Id);
+           List<MedicalDescription> list = MedicalDescriptionTable.GetDataByPatientId(patient.Id);
+           // List<SickLeave> list = SickLeaveTable.GetDataByPatientId(patient.Id);
 
-            ViewData["medicalDescription"] = new List<MedicalDescription>() { new MedicalDescription { Date = DateTime.Now, DoctorName="", Description= "", Type="", Id=0 } };
-            ViewData["documentation"] = new List<Documentation>() {new Documentation{ Id = 0, DoctorName = "", PatientId = 9, Disease="", Date = DateTime.Now}};
-            ViewData["Tests"] = new List<Test>() { new Test{ Id=9, DoctorName="", PatientId=9, Date = DateTime.Now, Description=""} };
-
-            ViewData["sickLeaveData"] = SickLeaveTable.GetData(); ;
-            ViewData["prescriptioneData"] = PrescriptionTable.GetData();
-            ViewData["visitData"] = VisitTable.GetData();
+            ViewData["PatientName"] = patient;
+            ViewData["documentation"] = docs;
+            ViewData["visitData"] = visits;
+            ViewData["prescriptioneData"] = prescriptions;
+            ViewData["Tests"] = tests;
+            //  ViewData["sickLeaveData"] = list;
             return View();
+
+
+          
         }
         public ActionResult Visits()
         {

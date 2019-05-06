@@ -38,5 +38,12 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      FROM Patient
                                                      WHERE Patient.Id = {id}");
         }
+
+
+     
+
+
+
+
     }
 }

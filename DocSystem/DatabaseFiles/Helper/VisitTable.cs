@@ -1,4 +1,5 @@
 ﻿using DocSystem.Models;
+using System;
 using System.Collections.Generic;
 
 namespace DocSystem.DatabaseFiles.Helper
@@ -48,5 +49,23 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      INNER JOIN Doctor ON Visit.DoctorId = Doctor.Id
                                                      WHERE Visit.PatientId = {id}");
         }
+
+        public static List<Visit> DoctorVisit(int patientId, int doctorId, string type, string doctor, string status, DateTime date)
+        {
+            return Properties.dbContext.GetVisitDb($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Date) 
+                                                     VALUES ({patientId},{doctorId},{type},{doctor},{status},{date})");
+
+        }
+
+        public static void InsertData(int doctorId, Visit model)
+        {
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO Visit
+                                                                  VALUES ({doctorId},{model.Type},{model.Doctor},{model.Status},{model.Date})");
+        }
+
+
+
+
+
     }
 }

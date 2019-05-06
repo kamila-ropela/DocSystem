@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Linq;
+using DocSystem.DatabaseFiles;
 
 namespace DocSystem.Controllers
 {
@@ -106,10 +107,28 @@ namespace DocSystem.Controllers
         }
 
 
-        public ActionResult DoctorVisit()
+        public IActionResult DoctorVisit()
         {
             return View();
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorVisit([FromForm]Visit visits)
+        {
+            DateTime data = DateTime.Now;
+            visits.Date = data;
+
+            VisitTable.InsertData(Properties.UserId, visits);
+           
+            return View();
+        }
+
+
+
+
+
+
 
         public ActionResult DoctorSickLeave()
         {
