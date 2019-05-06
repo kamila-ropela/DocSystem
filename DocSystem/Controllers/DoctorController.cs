@@ -106,7 +106,19 @@ namespace DocSystem.Controllers
             return View(); 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorPrescription([FromForm] Prescription presc)
+        {
+            DateTime data = DateTime.Now;
+            presc.Date = data;
 
+            PrescriptionTable.InsertData(Properties.UserId, presc);
+
+            return View();
+        }
+
+       
         public IActionResult DoctorVisit()
         {
             return View();
@@ -123,12 +135,6 @@ namespace DocSystem.Controllers
            
             return View();
         }
-
-
-
-
-
-
 
         public ActionResult DoctorSickLeave()
         {
@@ -147,11 +153,6 @@ namespace DocSystem.Controllers
 
             return View();
         }
-
-
-
-
-
 
 
         public ActionResult AddDocumentationView()
