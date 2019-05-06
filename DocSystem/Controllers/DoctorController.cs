@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Data;
 using System.Linq;
+using DocSystem.DatabaseFiles;
 
 namespace DocSystem.Controllers
 {
@@ -52,6 +53,21 @@ namespace DocSystem.Controllers
 
         public IActionResult AddDescription() {
             return View(); 
+        }
+    
+        public IActionResult AddDocumentationView()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddDocumentationView([FromForm]Documentation documentation)
+        {
+            Properties.UserId = 1;
+            documentation.PatientId = 2;
+            DocumentationTable.InsertData(Properties.UserId, documentation);
+            return View();
         }
 
 
@@ -112,11 +128,6 @@ namespace DocSystem.Controllers
         }
 
         public ActionResult DoctorSickLeave()
-        {
-            return View();
-        }
-
-        public ActionResult AddDocumentationView()
         {
             return View();
         }
