@@ -18,7 +18,9 @@ namespace Patients.Controllers
 
         {
            
+            Properties.UserId=patient.Id;
 
+            List<Patient> name = PatientTable.GetDataByPatientId(patient.Id);
             List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
             List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
             List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
