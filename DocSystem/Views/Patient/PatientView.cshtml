@@ -4,14 +4,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("PatientName", ViewData["PatientName"])
 
-@Html.Partial("VisitList", ViewData["visitData"])
-@Html.Partial("PrescriptionList", ViewData["prescriptioneData"])
-@Html.Partial("PatientTests", ViewData["Tests"])
 
-@Html.Partial("MedicalDescriptions", ViewData["medicalDescription"])
-@Html.Partial("DocumentationList", ViewData["documentation"])
+
+
+@Html.PartialAsync("PatientName", ViewData["PatientName"])
+
+@Html.PartialAsync("VisitList", ViewData["visitData"])
+@Html.PartialAsync("PrescriptionList", ViewData["prescriptioneData"])
+@Html.PartialAsync("PatientTests", ViewData["Tests"])
+
+@Html.PartialAsync("MedicalDescriptions", ViewData["medicalDescription"])
+@Html.PartialAsync("DocumentationList", ViewData["documentation"])
 
 
 

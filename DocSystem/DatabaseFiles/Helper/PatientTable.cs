@@ -40,7 +40,16 @@ namespace DocSystem.DatabaseFiles.Helper
         }
 
 
-     
+        public static List<Patient> GetDataByPatientId(int id)
+        {
+            return Properties.dbContext.GetPatientDb($@"SELECT Patient.Id,
+                                                             Patient.Name,
+                                                             Patient.Surname,
+                                                             Patient.Pesel,
+                                                             Patient.Address
+                                                     FROM Patient
+                                                     WHERE Patient.Id = {id}");
+        }
 
 
 

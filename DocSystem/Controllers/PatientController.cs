@@ -17,22 +17,21 @@ namespace Patients.Controllers
         public ActionResult PatientView(Patient patient)
 
         {
-            patientId = patient.Id;
-            patient.Id = 2;
-            List<Patient> pat = PatientTable.GetPatientById(patient.Id);
+           
+
             List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
             List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
             List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
             List<Documentation> docs = DocumentationTable.GetDataByPatientId(patient.Id);
-           List<MedicalDescription> list = MedicalDescriptionTable.GetDataByPatientId(patient.Id);
-           // List<SickLeave> list = SickLeaveTable.GetDataByPatientId(patient.Id);
+            List<MedicalDescription> list = MedicalDescriptionTable.GetDataByPatientId(patient.Id);
 
-            ViewData["PatientName"] = patient;
+
+            ViewData["PatientName"] = name;
             ViewData["documentation"] = docs;
             ViewData["visitData"] = visits;
             ViewData["prescriptioneData"] = prescriptions;
             ViewData["Tests"] = tests;
-            //  ViewData["sickLeaveData"] = list;
+            ViewData["Medical Descriptions"] = list;
             return View();
 
 
