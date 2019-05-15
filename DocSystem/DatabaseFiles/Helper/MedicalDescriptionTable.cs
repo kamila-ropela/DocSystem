@@ -18,12 +18,10 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      WHERE MedicalDescription.Id = {id}");
         }
 
-
-        public static List<MedicalDescription> AddDescription(int patientId, int doctorId, string type, string description, DateTime date)
+        public static void AddDescription(int patientId, int doctorId, string type, string description, String date)
         {
-
-            return Properties.dbContext.GetMedicalDescriptionDb($@"INSERT INTO MedicalDescription 
-                                                                    VALUES ({patientId},{doctorId},{type},{description},{date})");
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO  MedicalDescription(PatientId,DoctorId,Type, Description, Date) 
+                                                     VALUES ({patientId},{doctorId},'{type}','{description}','{date}')");
         }
     }
 }

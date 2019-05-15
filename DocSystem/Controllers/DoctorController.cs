@@ -16,10 +16,15 @@ namespace DocSystem.Controllers
         public static string nameOfTest;
 
         [HttpPost]
-        public ActionResult AddDescriptionAction([FromForm]string description)
+        public ActionResult AddDescription([FromForm] MedicalDescription model)
         {
-            if (!description.Length.Equals("")) { 
+            String des = model.Description;
+            if (des.Length>0) {
+                DateTime time = DateTime.Now.Date;
+                string date = time.ToString("yyyy-MM-dd");
+                MedicalDescriptionTable.AddDescription(Properties.UserId, patientId, model.Type, model.Description, date);
             }
+
             return View(); 
         }
 
