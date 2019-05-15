@@ -1,0 +1,25 @@
+﻿@model IEnumerable<DocSystem.Models.Documentation>
+
+@{
+    ViewData["Title"] = "Course";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                Disease
+            </th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Disease</td>
+                <td>
+                    @Html.ActionLink("Details", "Details", new { id = item.Disease })
+                </td>
+            </tr>
+        }
+        </table>
+</div>
