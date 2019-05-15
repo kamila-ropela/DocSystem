@@ -54,6 +54,21 @@ namespace DocSystem.Controllers
         public IActionResult AddDescription() {
             return View(); 
         }
+    
+        public IActionResult AddDocumentationView()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddDocumentationView([FromForm]Documentation documentation)
+        {
+            Properties.UserId = 1;
+            documentation.PatientId = 2;
+            DocumentationTable.InsertData(Properties.UserId, documentation);
+            return View();
+        }
 
 
         public IActionResult MedicalDescription(int id)
@@ -141,6 +156,7 @@ namespace DocSystem.Controllers
             return View();
         }
 
+<<<<<<< HEAD
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -160,6 +176,8 @@ namespace DocSystem.Controllers
             return View();
         }
 
+=======
+>>>>>>> refs/remotes/origin/master
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;
