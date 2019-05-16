@@ -123,14 +123,14 @@ namespace DocSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DoctorPrescription([FromForm] Prescription presc)
+        public ActionResult DoctorPrescription([FromForm] Prescription prescription)
         {
-            DateTime data = DateTime.Now;
-            presc.Date = data;
-
-            PrescriptionTable.InsertData(Properties.UserId, presc);
-
+           Properties.UserId = 1;
+           prescription.PatientId = 2;
+            PrescriptionTable.InsertData(Properties.UserId, prescription);
             return View();
+
+            
         }
 
        
@@ -156,7 +156,7 @@ namespace DocSystem.Controllers
             return View();
         }
 
-<<<<<<< HEAD
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -171,13 +171,7 @@ namespace DocSystem.Controllers
         }
 
 
-        public ActionResult AddDocumentationView()
-        {
-            return View();
-        }
-
-=======
->>>>>>> refs/remotes/origin/master
+      
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;
