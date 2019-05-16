@@ -16,10 +16,15 @@ namespace DocSystem.Controllers
         public static string nameOfTest;
 
         [HttpPost]
-        public ActionResult AddDescriptionAction([FromForm]string description)
+        public ActionResult AddDescription([FromForm] MedicalDescription model)
         {
-            if (!description.Length.Equals("")) { 
+            String des = model.Description;
+            if (des.Length>0) {
+                DateTime time = DateTime.Now.Date;
+                string date = time.ToString("yyyy-MM-dd");
+                MedicalDescriptionTable.AddDescription(Properties.UserId, patientId, model.Type, model.Description, date);
             }
+
             return View(); 
         }
 
@@ -121,17 +126,60 @@ namespace DocSystem.Controllers
             return View(); 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorPrescription([FromForm] Prescription prescription)
+        {
+            // DateTime date = DateTime.Now;
+           // Properties.UserId = 1;
+            prescription.PatientId = 2;
+            PrescriptionTable.InsertData(Properties.UserId, prescription);
+            return View();
 
-        public ActionResult DoctorVisit()
+            
+        }
+
+       
+        public IActionResult DoctorVisit()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorVisit([FromForm]Visit visits)
+        {
+            
+
+
+           
+            VisitTable.InsertData(Properties.UserId, visits);
+            return View();
+
+            
         }
 
         public ActionResult DoctorSickLeave()
         {
+
             return View();
         }
 
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorSickLeave([FromForm]SickLeave sickleave)
+        {
+            DateTime data = DateTime.Now;
+            SickLeaveTable.InsertData(Properties.UserId, sickleave);
+            return View();
+
+         
+        }
+
+
+      
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;

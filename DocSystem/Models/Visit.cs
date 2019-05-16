@@ -19,4 +19,11 @@ namespace DocSystem.Models
 
         public DateTime Date { get; set; }
     }
+
+    public enum Choose
+    {
+        wizyta,
+        skierowanie
+    }
+
 }
