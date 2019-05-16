@@ -12,32 +12,11 @@ namespace Patients.Controllers
     public class PatientController : Controller
     {
         public static string nameOfTest;
-         public static int patientId;
 
-        public ActionResult PatientView(Patient patient)
-
+        public ActionResult PatientView()
         {
-           
-            //Properties.UserId=patient.Id;
-
-            List<Patient> name = PatientTable.GetDataByPatientId(patient.Id);
-            List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
-            List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
-            List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
-            List<Documentation> docs = DocumentationTable.GetDataByPatientId(patient.Id);
-            List<MedicalDescription> list = MedicalDescriptionTable.GetDataByPatientId(patient.Id);
-
-
-            ViewData["PatientName"] = name;
-            ViewData["documentation"] = docs;
-            ViewData["visitData"] = visits;
-            ViewData["prescriptioneData"] = prescriptions;
-            ViewData["Tests"] = tests;
-            ViewData["Medical Descriptions"] = list;
+            
             return View();
-
-
-          
         }
         public ActionResult Visits()
         {
@@ -51,7 +30,7 @@ namespace Patients.Controllers
         public ActionResult PatientTests()
         {
             DateTime date = DateTime.Now;
-            Test test = new Test { Id = 1, Date = date, Description = "", DoctorName = "", PatientId = 1};
+            Test test = new Test { Id = 1, Date = date, Description = "", DoctorName = "", PatientId = 1 };
             List<Test> list = new List<Test>();
             list.Add(test);
             return View(list);
@@ -60,7 +39,7 @@ namespace Patients.Controllers
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name="H2O",TestId=111, Unit="mm",Value=100};
+            Result res = new Result { Id = 1, Name = "H2O", TestId = 111, Unit = "mm", Value = 100 };
             List<Result> list = new List<Result>();
             list.Add(res);
             return View(list);
@@ -81,7 +60,7 @@ namespace Patients.Controllers
             dt.Columns.Add("Value", System.Type.GetType("System.Double"));
             dt.Columns.Add("Data", System.Type.GetType("System.String"));
             DataRow dr;
-            
+
             var dataTest = TestTable.GetDataByPatientId(Properties.UserId);
             foreach (var test in dataTest)
             {
@@ -94,7 +73,7 @@ namespace Patients.Controllers
                         dr["Value"] = dataResult[i].Value;
                         dr["Data"] = test.Date.ToString("dd.MM.yyyy");
                         dt.Rows.Add(dr);
-                    }                    
+                    }
                 }
             }
 
@@ -113,7 +92,7 @@ namespace Patients.Controllers
             List<Documentation> diseaseList = new List<Documentation>();
 
             Properties.UserId = 9;
-            docList.Add(new Documentation {Id = 0, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now});
+            docList.Add(new Documentation { Id = 0, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now });
             docList.Add(new Documentation { Id = 1, DoctorName = "", PatientId = 9, Disease = "b", Date = DateTime.Now });
             docList.Add(new Documentation { Id = 2, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now });
 
@@ -121,7 +100,7 @@ namespace Patients.Controllers
             var tmp = docList.Select(documentation => documentation.Disease).Distinct();
             foreach (var item in tmp)
             {
-                diseaseList.Add(new Documentation {Disease = item });
+                diseaseList.Add(new Documentation { Disease = item });
             }
             return View(diseaseList);
         }

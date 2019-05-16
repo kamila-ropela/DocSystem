@@ -20,6 +20,7 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      FROM Prescription
                                                      INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
                                                      WHERE Prescription.PatientId = {id}");
+
         }
 
 

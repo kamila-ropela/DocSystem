@@ -125,8 +125,9 @@ namespace DocSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DoctorPrescription([FromForm] Prescription prescription)
         {
-           Properties.UserId = 1;
-           prescription.PatientId = 2;
+            // DateTime date = DateTime.Now;
+           // Properties.UserId = 1;
+            prescription.PatientId = 2;
             PrescriptionTable.InsertData(Properties.UserId, prescription);
             return View();
 
@@ -143,16 +144,19 @@ namespace DocSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DoctorVisit([FromForm]Visit visits)
         {
-            DateTime data = DateTime.Now;
-            visits.Date = data;
+            
 
-            VisitTable.InsertData(Properties.UserId, visits);
+
            
+            VisitTable.InsertData(Properties.UserId, visits);
             return View();
+
+            
         }
 
         public ActionResult DoctorSickLeave()
         {
+
             return View();
         }
 
@@ -160,14 +164,13 @@ namespace DocSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DoctorSickLeave([FromForm]SickLeave sick)
+        public ActionResult DoctorSickLeave([FromForm]SickLeave sickleave)
         {
             DateTime data = DateTime.Now;
-            sick.Date = data;
-
-            SickLeaveTable.InsertData(Properties.UserId, sick);
-
+            SickLeaveTable.InsertData(Properties.UserId, sickleave);
             return View();
+
+         
         }
 
 

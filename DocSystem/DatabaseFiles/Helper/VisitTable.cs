@@ -48,20 +48,33 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      INNER JOIN Patient ON Visit.PatientId = Patient.Id
                                                      INNER JOIN Doctor ON Visit.DoctorId = Doctor.Id
                                                      WHERE Visit.PatientId = {id}");
+          
         }
 
-        public static List<Visit> DoctorVisit(int patientId, int doctorId, string type, string doctor, string status, DateTime date)
+        public static List<Visit> DoctorVisit ( int patientId, int doctorId, string type, string doctor, string status, DateTime date)
         {
-            return Properties.dbContext.GetVisitDb($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Date) 
-                                                     VALUES ({patientId},{doctorId},{type},{doctor},{status},{date})");
-
+            return Properties.dbContext.GetVisitDb($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Status, Date) 
+                                                     VALUES ('" + patientId + "," + doctorId + "," +
+                                                     type + "," + doctor + "," + status + "','CURDATE()');");
         }
 
-        public static void InsertData(int doctorId, Visit model)
+
+
+        public static void InsertData( int doctorId, Visit visit)
         {
-            Properties.dbContext.ExecuteQuery($@"INSERT INTO Visit
-                                                                  VALUES ({doctorId},{model.Type},{model.Doctor},{model.Status},{model.Date})");
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Status, Date) 
+                                                     VALUES ('" + visit.PatientName + "','" + doctorId + "','" +
+                                                     visit.Type + "','" + visit.Doctor + "','" + visit.Status + "','" + visit.Date + "');");
+
+
+
         }
+
+
+
+
+
+
 
 
 
