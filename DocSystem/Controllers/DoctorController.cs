@@ -126,17 +126,60 @@ namespace DocSystem.Controllers
             return View(); 
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorPrescription([FromForm] Prescription prescription)
+        {
+            // DateTime date = DateTime.Now;
+           // Properties.UserId = 1;
+            prescription.PatientId = 2;
+            PrescriptionTable.InsertData(Properties.UserId, prescription);
+            return View();
 
-        public ActionResult DoctorVisit()
+            
+        }
+
+       
+        public IActionResult DoctorVisit()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorVisit([FromForm]Visit visits)
+        {
+            
+
+
+           
+            VisitTable.InsertData(Properties.UserId, visits);
+            return View();
+
+            
         }
 
         public ActionResult DoctorSickLeave()
         {
+
             return View();
         }
 
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorSickLeave([FromForm]SickLeave sickleave)
+        {
+            DateTime data = DateTime.Now;
+            SickLeaveTable.InsertData(Properties.UserId, sickleave);
+            return View();
+
+         
+        }
+
+
+      
         public IActionResult Results(int id)
         {
             DateTime date = DateTime.Now;
