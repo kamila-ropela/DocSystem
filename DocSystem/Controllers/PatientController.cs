@@ -94,5 +94,23 @@ namespace Patients.Controllers
 
             return Json(data);
         }
+        public ActionResult Course()
+        {
+            List<Documentation> docList = new List<Documentation>();
+            List<Documentation> diseaseList = new List<Documentation>();
+
+            Properties.UserId = 9;
+            docList.Add(new Documentation {Id = 0, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now});
+            docList.Add(new Documentation { Id = 1, DoctorName = "", PatientId = 9, Disease = "b", Date = DateTime.Now });
+            docList.Add(new Documentation { Id = 2, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now });
+
+            //docList.AddRange(DocumentationTable.GetDataByPatientId(Properties.UserId));
+            var tmp = docList.Select(documentation => documentation.Disease).Distinct();
+            foreach (var item in tmp)
+            {
+                diseaseList.Add(new Documentation {Disease = item });
+            }
+            return View(diseaseList);
+        }
     }
 }
