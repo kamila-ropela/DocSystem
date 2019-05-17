@@ -12,7 +12,7 @@ namespace DocSystem.Controllers
         public IActionResult LogIn()
         {
             Properties.dbContext = HttpContext.RequestServices.GetService(typeof(DbContext)) as DbContext;
-          //  UsersTable.ChangePassword(HashPassword("test", 10));
+            //UsersTable.ChangePassword(HashPassword("test", 10));
             return View();
         }
 
@@ -50,8 +50,6 @@ namespace DocSystem.Controllers
             var name = login.Substring(0, login.IndexOf('.'));
             var surname = login.Substring(login.IndexOf('.') + 1, login.Length - login.IndexOf('.') - 1);
             var data = UsersTable.GetDataByNameAndSurname(name, surname);
-
-
 
             return (data.Item1, data.Item2);
         }
