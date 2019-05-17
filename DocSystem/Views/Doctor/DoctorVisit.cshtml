@@ -15,29 +15,32 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
 
+            <div>
+
+                <input type="radio" name="Type" value="wizyta" />wizyta
+                <input type="radio" name="Type" value="skierowanie" />skierowanie
+            </div>
+
+
+
             <div class="form-group">
-                @Html.DropDownList("Typ",
-                         new SelectList(Enum.GetValues(typeof(Choose))),
-                         "Select type",
-                         new { @class = "form-control" })
-                </div>
+                <label asp-for="Doctor" class="control-label"></label>
+                <input asp-for="Doctor" class="form-control" />
+                <span asp-validation-for="Doctor" class="text-danger"></span>
+            </div>
+            </br>
+            <div>
 
-                <div class="form-group">
-                    <label asp-for="Doctor" class="control-label"></label>
-                    <input asp-for="Doctor" class="form-control" />
-                    <span asp-validation-for="Doctor" class="text-danger"></span>
-                </div>
-
-
-
-                <div class="form-group">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
+                <input type="radio" name="Status" value="wykonano" style="display:none" />
+                <input type="radio" name="Status" value="niewykonano" checked="checked"/>niewykonano
+            </div>
+            </br>
+            <div class="form-group">
+                <input type="submit" value="Add" class="btn btn-default" />
+            </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+
 

@@ -123,40 +123,51 @@ namespace DocSystem.Controllers
 
         public ActionResult DoctorPrescription(int id)
         {
+
+
+
+
+
             return View(); 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DoctorPrescription([FromForm] Prescription prescription)
+        public ActionResult DoctorPrescription([FromForm] Prescription presc)
         {
-            // DateTime date = DateTime.Now;
-           // Properties.UserId = 1;
-            prescription.PatientId = 2;
-            PrescriptionTable.InsertData(Properties.UserId, prescription);
+            
+
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
+            PrescriptionTable.InsertData( presc.PatientId, Properties.UserId, presc.Medicine, presc.Description, date, presc.Refund);
+
+
             return View();
 
-            
         }
-
-       
         public IActionResult DoctorVisit()
         {
+            
+
             return View();
+            
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DoctorVisit([FromForm]Visit visits)
         {
-            
 
 
-           
-            VisitTable.InsertData(Properties.UserId, visits);
+
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
+            VisitTable.InsertD(patientId, Properties.UserId, visits.Type, visits.Doctor, visits.Status, date);
+
+
             return View();
 
-            
+
         }
 
         public ActionResult DoctorSickLeave()

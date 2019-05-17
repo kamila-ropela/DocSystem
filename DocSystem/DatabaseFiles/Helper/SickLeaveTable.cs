@@ -16,7 +16,7 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      FROM SickLeave
                                                      INNER JOIN Patient ON SickLeave.PatientId = Patient.Id
                                                      INNER JOIN Doctor ON SickLeave.DoctorId = Doctor.Id
-                                                     WHERE  Prescription.PatientId = {id}");
+                                                     WHERE  SickLeave.PatientId = {id}");
                                                 
         }
 
