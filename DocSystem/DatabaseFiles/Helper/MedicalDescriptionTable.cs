@@ -15,7 +15,7 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      MedicalDescription.Date
                                                      FROM MedicalDescription
                                                      INNER JOIN Doctor ON MedicalDescription.DoctorId = Doctor.Id
-                                                     WHERE MedicalDescription.Id = {id}");
+                                                     WHERE MedicalDescription.PatientId = {id}");
         }
 
         public static void AddDescription(int patientId, int doctorId, string type, string description, String date)
