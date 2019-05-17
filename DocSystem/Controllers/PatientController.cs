@@ -21,7 +21,7 @@ namespace Patients.Controllers
             ViewData["documentation"] = new List<Documentation>() {new Documentation{ Id = 0, DoctorName = "", PatientId = 9, Disease="", Date = DateTime.Now}};
             ViewData["Tests"] = new List<Test>() { new Test{ Id=9, DoctorName="", PatientId=9, Date = DateTime.Now, Description=""} };
 
-            ViewData["sickLeaveData"] = SickLeaveTable.GetData(); ;
+            ViewData["sickLeaveData"] = SickLeaveTable.GetDataByPatientId(2); ;
             ViewData["prescriptioneData"] = PrescriptionTable.GetData();
             ViewData["visitData"] = VisitTable.GetData();
             return View();

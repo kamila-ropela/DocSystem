@@ -209,7 +209,7 @@ namespace DocSystem.DatabaseFiles
                         {
                             Id = Convert.ToInt32(reader["Id"]),
                             PatientId = Convert.ToInt32(reader["PatientId"]),
-                            DoctorId = Convert.ToInt32(reader["DoctorId"]),
+                            DoctorName = reader["DoctorName"].ToString(),
                             Days =Convert.ToInt32(reader["Days"].ToString()),
                             Description = reader["Description"].ToString(),
                             Date = Convert.ToDateTime(reader["Date"])
