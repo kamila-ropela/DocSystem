@@ -51,25 +51,12 @@ namespace DocSystem.DatabaseFiles.Helper
           
         }
 
-        public static List<Visit> DoctorVisit ( int patientId, int doctorId, string type, string doctor, string status, DateTime date)
+        public static List<Visit> DoctorVisit ( int patientId, int doctorId, string type, string doctor, string status, String date)
         {
             return Properties.dbContext.GetVisitDb($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Status, Date) 
                                                      VALUES ('" + patientId + "," + doctorId + "," +
                                                      type + "," + doctor + "," + status + "','CURDATE()');");
         }
-
-
-
-        public static void InsertData( int doctorId, Visit visit)
-        {
-            Properties.dbContext.ExecuteQuery($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Status, Date) 
-                                                     VALUES ('" + visit.PatientName + "','" + doctorId + "','" +
-                                                     visit.Type + "','" + visit.Doctor + "','" + visit.Status + "','" + visit.Date + "');");
-
-
-
-        }
-
 
         public static void InsertD(int patientId, int doctorId, string type, string doctor, string status, String date)
         {
