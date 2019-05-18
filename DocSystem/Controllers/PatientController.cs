@@ -13,17 +13,26 @@ namespace Patients.Controllers
     {
         public static string nameOfTest;
 
-        public ActionResult PatientView()
+        public ActionResult PatientView(Patient patient)
+
         {
-            ViewData["PatientName"] = new Patient() { Id = 2, Name = "Hania", Surname = "fgf", Pesel = 787879, Address = "Gdansk" };
+            var patients = PatientTable.GetPatientById(Properties.UserId);
+            var description = MedicalDescriptionTable.GetDataByPatientId(Properties.UserId);
+            var visit = VisitTable.GetDataByPatientId(Properties.UserId);
+            var prescript = PrescriptionTable.GetData(Properties.UserId);
+            var test = TestTable.GetData(Properties.UserId);
+            var leavesick = SickLeaveTable.GetDataByPatientId(Properties.UserId);
+            var doc = DocumentationTable.GetDataByPatientId(Properties.UserId);
 
-            ViewData["medicalDescription"] = new List<MedicalDescription>() { new MedicalDescription { Date = DateTime.Now, DoctorName="", Description= "", Type="", Id=0 } };
-            ViewData["documentation"] = new List<Documentation>() {new Documentation{ Id = 0, DoctorName = "", PatientId = 9, Disease="", Date = DateTime.Now}};
-            ViewData["Tests"] = new List<Test>() { new Test{ Id=9, DoctorName="", PatientId=9, Date = DateTime.Now, Description=""} };
-
-            ViewData["sickLeaveData"] = SickLeaveTable.GetDataByPatientId(2); ;
-            ViewData["prescriptioneData"] = PrescriptionTable.GetData();
-            ViewData["visitData"] = VisitTable.GetData();
+            //  ViewData["PatientName"] = PatientTable.GetPatientById(patient.Id);
+            ViewData["PatientName"] = patients[0];
+            ViewData["visitData"] = visit;
+            ViewData["prescriptioneData"] = prescript;
+            ViewData["Tests"] = test;
+            ViewData["sickLeaveData"] = leavesick;
+            ViewData["medicalDescription"] = description;
+            ViewData["documentation"] = doc;
+         
             return View();
         }
         public ActionResult Visits()

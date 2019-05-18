@@ -4,17 +4,13 @@
     ViewData["Title"] = "PrescriptionList";
 }
 
-<h2>PrescriptionList</h2>
+<h2>Prescriptions</h2>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PatientId)
-            </th>
+            
+           
             <th>
                 @Html.DisplayNameFor(model => model.DoctorName)
             </th>
@@ -36,12 +32,8 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PatientId)
-            </td>
+            
+           
             <td>
                 @Html.DisplayFor(modelItem => item.DoctorName)
             </td>

@@ -155,7 +155,7 @@ namespace DocSystem.DatabaseFiles
                             PatientId = Convert.ToInt32(reader["PatientId"]),
                             DoctorName = reader["DoctorName"].ToString(),
                             Disease = reader["Disease"].ToString(),
-                            Date = Convert.ToDateTime(reader["Address"])
+                            Date = Convert.ToDateTime(reader["Date"])
                         });
                     }
                 }
@@ -183,7 +183,7 @@ namespace DocSystem.DatabaseFiles
                             DoctorName = reader["DoctorName"].ToString(),
                             Medicine = reader["Medicine"].ToString(),
                             Description = reader["Description"].ToString(),
-                            Refund = Convert.ToInt32(reader["Refund"]),
+                            Refund = reader["Refund"].ToString(),
                             Date = Convert.ToDateTime(reader["Date"])
                         });
                     }

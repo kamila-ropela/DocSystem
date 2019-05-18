@@ -9,6 +9,7 @@ namespace DocSystem.DatabaseFiles.Helper
         public static List<SickLeave> GetDataByPatientId(int id)
         {
             return Properties.dbContext.GetSickLeaveDb($@"SELECT SickLeave.Id,
+                                                     SickLeave.PatientId,
                                                      Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
                                                      SickLeave.Days,
                                                      SickLeave.Description,
@@ -16,8 +17,24 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      FROM SickLeave
                                                      INNER JOIN Patient ON SickLeave.PatientId = Patient.Id
                                                      INNER JOIN Doctor ON SickLeave.DoctorId = Doctor.Id
-                                                     WHERE  Prescription.PatientId = {id}");
+                                                     WHERE  SickLeave.PatientId = {id}");
                                                 
+        }
+
+        public static List<SickLeave> GetData(int id)
+        {
+            return Properties.dbContext.GetSickLeaveDb($@"SELECT SickLeave.Id,
+                                                   
+                                                     SickLeave.PatientId
+                                                      Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                     SickLeave.Days,
+                                                     SickLeave.Description,
+                                                     SickLeave.Date
+                                                     FROM SickLeave
+                                                     INNER JOIN Patient ON SickLeave.PatientId = Patient.Id
+                                                     INNER JOIN Doctor ON SickLeave.DoctorId = Doctor.Id
+                                                     WHERE  SickLeave.Id = {id}");
+
         }
 
 
@@ -39,6 +56,13 @@ namespace DocSystem.DatabaseFiles.Helper
 
 
         }
+
+        public static void InsertD(int patientId, int doctorId, int days, string description, DateTime date)
+        {
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO  SickLeave(PatientId, DoctorId, Days, Description, Date) 
+                                                     VALUES ({patientId},{doctorId},'{days}','{description}','{date}')");
+        }
+
 
 
 
