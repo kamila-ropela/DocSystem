@@ -68,8 +68,13 @@ namespace DocSystem.Controllers
             return View(); 
         }
     
-        public IActionResult AddDocumentationView()
+        public IActionResult AddDocumentationView(int id)
         {
+            ViewBag.var = id;
+
+            var patients = PatientTable.GetPatientById(patientId);
+
+            ViewData["patient"] = patients[0];
             return View();
         }
 
@@ -77,8 +82,7 @@ namespace DocSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddDocumentationView([FromForm]Documentation documentation)
         {
-            Properties.UserId = 1;
-            documentation.PatientId = 2;
+
             DocumentationTable.InsertData(Properties.UserId, documentation);
             return View();
         }

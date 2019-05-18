@@ -51,7 +51,7 @@
 <div>
     <div>
         <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDescription", "Doctor") + "?id="+@ViewBag.var+"'");">Add description</button>
-        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDocumentationView", "Doctor") + "'");">Add documentation</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDocumentationView", "Doctor")  + "?id="+@ViewBag.var+"'");">Add documentation</button>
         <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorPrescription", "Doctor") + "'");">Add prescription</button>
         <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorSickLeave", "Doctor") + "'");">Add sick leave</button>
     </div>
