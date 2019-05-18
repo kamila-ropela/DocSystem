@@ -1,10 +1,8 @@
-﻿@model DocSystem.Models.MedicalDescription
-
+﻿
 @{
     ViewData["Title"] = "Description";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 
 @Html.Partial("VisitInfo", ViewData["visit"])
 @Html.Partial("PatientInfo", ViewData["patient"])
@@ -26,4 +24,3 @@
         <input type="submit" value="Create" class="btn btn-default">
     </div>
 </form>
-

@@ -183,7 +183,7 @@ namespace DocSystem.DatabaseFiles
                             DoctorName = reader["DoctorName"].ToString(),
                             Medicine = reader["Medicine"].ToString(),
                             Description = reader["Description"].ToString(),
-                            Refund = Convert.ToInt32(reader["Refund"]),
+                            Refund = reader["Refund"].ToString(),
                             Date = Convert.ToDateTime(reader["Date"])
                         });
                     }
