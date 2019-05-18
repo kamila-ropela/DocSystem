@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@Html.Partial("PatientInfo", ViewData["data"])
+@Html.Partial("PatientInfo", ViewData["patient"])
 
 
 <h2>Add Prescription</h2>
@@ -26,13 +26,13 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
 
-            <div>
-                
-                    <input type="radio" name="Refund" value="tak" />tak
-                    <input type="radio" name="Refund" value="nie" />nie
-           </div>
+            <h4>Refund</h4>
 
-         
+            <div>      
+                   <input type="radio" name="Refund" value="yes" />yes
+                    <input type="radio" name="Refund" value="no" />no
+           </div>
+       
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-default" />
             </div>
@@ -40,7 +40,4 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

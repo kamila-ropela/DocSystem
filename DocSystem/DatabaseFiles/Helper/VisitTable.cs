@@ -58,7 +58,7 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      type + "," + doctor + "," + status + "','CURDATE()');");
         }
 
-        public static void InsertD(int patientId, int doctorId, string type, string doctor, string status, String date)
+        public static void InsertD(int patientId, int doctorId, string type, string doctor, string status, DateTime date)
         {
             Properties.dbContext.ExecuteQuery($@"INSERT INTO  Visit(PatientId, DoctorId, Type, Doctor, Status, Date) 
                                                      VALUES ({patientId},{doctorId},'{type}','{doctor}','{status}','{date}')");

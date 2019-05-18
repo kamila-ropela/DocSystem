@@ -135,33 +135,38 @@ namespace DocSystem.Controllers
         public ActionResult DoctorPrescription(int id)
         {
 
+            ViewBag.var = id;
+            var patients = PatientTable.GetPatientById(patientId);
+
+            ViewData["patient"] = patients[0];
+
+            return View();
 
 
 
-
-            return View(); 
+            
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult DoctorPrescription([FromForm] Prescription presc)
         {
-            
+            var patients = PatientTable.GetPatientById(patientId);
+
 
             DateTime time = DateTime.Now.Date;
-            string date = time.ToString("yyyy-MM-dd");
-            PrescriptionTable.InsertData( presc.PatientId, Properties.UserId, presc.Medicine, presc.Description, date, presc.Refund);
+           // string date = time.ToString("yyyy-MM-dd");
+            PrescriptionTable.InsertData( patients[0].Id, Properties.UserId, presc.Medicine, presc.Description, time, presc.Refund);
 
 
             return View();
 
         }
-        public IActionResult DoctorVisit()
+        public IActionResult DoctorVisit(int id)
         {
-            
 
             return View();
-            
+
         }
 
         [HttpPost]
@@ -169,11 +174,11 @@ namespace DocSystem.Controllers
         public ActionResult DoctorVisit([FromForm]Visit visits)
         {
 
+            var patients = PatientTable.GetPatientById(patientId);
 
-
-            DateTime time = DateTime.Now.Date;
-            string date = time.ToString("yyyy-MM-dd");
-            VisitTable.InsertD(patientId, Properties.UserId, visits.Type, visits.Doctor, visits.Status, date);
+            DateTime time = DateTime.Now;
+           // string date = time.ToString("yyyy-MM-dd");
+            VisitTable.InsertD(patients[0].Id, Properties.UserId, visits.Type, visits.Doctor, visits.Status, time);
 
 
             return View();
@@ -181,8 +186,13 @@ namespace DocSystem.Controllers
 
         }
 
-        public ActionResult DoctorSickLeave()
+        public ActionResult DoctorSickLeave(int id)
         {
+
+            ViewBag.var = id;
+            var patients = PatientTable.GetPatientById(patientId);
+
+            ViewData["patient"] = patients[0];
 
             return View();
         }
@@ -191,10 +201,13 @@ namespace DocSystem.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DoctorSickLeave([FromForm]SickLeave sickleave)
+        public ActionResult DoctorSickLeave([FromForm]SickLeave sl)
         {
-            DateTime data = DateTime.Now;
-            SickLeaveTable.InsertData(Properties.UserId, sickleave);
+            var patients = PatientTable.GetPatientById(patientId);
+            DateTime time = DateTime.Now;
+            // string date = time.ToString("yyyy-MM-dd");
+            SickLeaveTable.InsertD(patients[0].Id, Properties.UserId, sl.Days, sl.Description, time);
+
             return View();
 
          

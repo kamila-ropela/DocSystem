@@ -40,6 +40,13 @@ namespace DocSystem.DatabaseFiles.Helper
 
         }
 
+        public static void InsertD(int patientId, int doctorId, int days, string description, DateTime date)
+        {
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO  SickLeave(PatientId, DoctorId, Days, Description, Date) 
+                                                     VALUES ({patientId},{doctorId},'{days}','{description}','{date}')");
+        }
+
+
 
 
 
