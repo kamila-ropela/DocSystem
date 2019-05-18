@@ -1,34 +1,45 @@
 ﻿@model IEnumerable<DocSystem.Models.MedicalDescription>
 
 @{
-    ViewData["Title"] = "Medical Descriptions";
+    ViewData["Title"] = "MedicalDescriptions";
 }
 
 <h2>Medical Descriptions</h2>
 
+
 <table class="table">
     <thead>
         <tr>
+
+
             <th>
-                Type
+                @Html.DisplayNameFor(model => model.Type)
             </th>
             <th>
-                Description
+                @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                Date
+                @Html.DisplayNameFor(model => model.Date)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td>
-            </td>
-        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

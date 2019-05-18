@@ -36,8 +36,6 @@ namespace DocSystem.DatabaseFiles.Helper
     
 
 
-       
-
 
         public static void InsertData(int patientId, int doctorId, string medicine, string description, DateTime date, string refund)
         {
@@ -47,11 +45,7 @@ namespace DocSystem.DatabaseFiles.Helper
 
 
 
-
-
-
-
-        public static List<Prescription> GetData()
+        public static List<Prescription> GetData(int id)
         {
             return Properties.dbContext.GetPrescriptionDb($@"SELECT Prescription.Id,
                                                             Prescription.PatientId,
@@ -61,7 +55,9 @@ namespace DocSystem.DatabaseFiles.Helper
                                                             Prescription.Date,
                                                             Prescription.Refund
                                                      FROM Prescription
-                                                     INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id");
+                                                     INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
+                                                    INNER JOIN Patient ON Prescription.PatientId = Patient.Id
+                                                     WHERE Prescription.PatientId = {id}"); 
         }
 
     }
