@@ -1,26 +1,9 @@
-﻿
+﻿@model DocSystem.Models.MedicalDescription
 @{
     ViewData["Title"] = "Description";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<<<<<<< HEAD
-@Html.Partial("PatientInfo", ViewData["data"])
-@Html.Partial("VisitInfo", ViewData["data"])
-
-<h1>Description</h1>
-<textarea rows="10" class="form-control">
-</textarea>
-<br>
-<button class="btn btn-primary">Save</button>
-
-<form asp-action="AddDescriptionAction">
-    <p>
-    <input type="text" name="description">
-    <button type="submit" class="btn btn-primary">Submit</button>
-    </p>
-</form>
-=======
 @Html.Partial("VisitInfo", ViewData["visit"])
 @Html.Partial("PatientInfo", ViewData["patient"])
 
@@ -30,13 +13,14 @@
         <label asp-for="Type" class="control-label"></label></br>
         <input type="radio" asp-for="Type" value="visit">Visit </></br>
         <input type="radio" asp-for="Type" value="examination">Examination</>
+
     </div>
     <div class="form-group">
         <label asp-for="Description" class="control-label"></label>
         <input asp-for="Description" class="form-control" />
+
     </div>
     <div class="form-group">
         <input type="submit" value="Create" class="btn btn-default">
     </div>
 </form>
->>>>>>> refs/remotes/origin/master
