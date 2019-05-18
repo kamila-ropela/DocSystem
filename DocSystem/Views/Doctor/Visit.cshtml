@@ -4,9 +4,10 @@
     ViewData["Title"] = "Visit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<h2>Visit</h2>
 
-<div>   
+
+<h2>Visit</h2>
+<div>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -49,7 +50,7 @@
 </div>
 <div>
     <div>
-        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDescription", "Doctor") + "'");">Add description</button>
+        <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDescription", "Doctor") + "?id="+@ViewBag.var+"'");">Add description</button>
         <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("AddDocumentationView", "Doctor") + "'");">Add documentation</button>
         <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorPrescription", "Doctor") + "'");">Add prescription</button>
         <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorSickLeave", "Doctor") + "'");">Add sick leave</button>

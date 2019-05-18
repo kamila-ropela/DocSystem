@@ -25,10 +25,10 @@ namespace DocSystem.Controllers
                 MedicalDescriptionTable.AddDescription(Properties.UserId, patientId, model.Type, model.Description, date);
             }
 
-            return View(); 
+            return RedirectToAction("DoctorView", "Doctor", PatientTable.GetPatientById(patientId)[0]); 
         }
 
-            public IActionResult DoctorIndex()
+        public IActionResult DoctorIndex()
         {
                 return View();
            
@@ -56,7 +56,15 @@ namespace DocSystem.Controllers
         }
 
 
-        public IActionResult AddDescription() {
+        public IActionResult AddDescription(int id) {
+            ViewBag.var = id; 
+
+
+            var data = VisitTable.GetDataById(id);
+            var patients = PatientTable.GetPatientById(patientId);
+
+            ViewData["patient"] = patients[0];
+            ViewData["visit"] = data[0]; 
             return View(); 
         }
     
@@ -83,6 +91,8 @@ namespace DocSystem.Controllers
 
         public IActionResult Visit(int id)
         {
+            ViewBag.var = id;
+
             var data = VisitTable.GetDataById(id);
 
             if (data.Count == 0)
@@ -143,6 +153,20 @@ namespace DocSystem.Controllers
         public IActionResult DoctorVisit()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult DoctorVisit([FromForm]Visit visits)
+        {
+            
+
+
+           
+            VisitTable.InsertData(Properties.UserId, visits);
+            return View();
+
+            
         }
 
         [HttpPost]
