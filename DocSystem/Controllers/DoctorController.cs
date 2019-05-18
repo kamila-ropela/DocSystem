@@ -185,20 +185,6 @@ namespace DocSystem.Controllers
 
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult DoctorVisit([FromForm]Visit visits)
-        {
-            
-
-
-           
-            VisitTable.InsertData(Properties.UserId, visits);
-            return View();
-
-            
-        }
-
         public ActionResult DoctorSickLeave(int id)
         {
 
