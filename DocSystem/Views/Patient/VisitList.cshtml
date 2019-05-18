@@ -31,7 +31,7 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-           
+
             <td>
                 @Html.DisplayFor(modelItem => item.DoctorName)
             </td>
@@ -41,9 +41,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Doctor)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
+            @{ if (item.Status == "done")
+                {
+                    <td><span style="background-color:green">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+                else if (item.Status == "pending")
+                {
+                    <td><span style="background-color:red">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+                else if (item.Status == "in progress")
+                {
+                    <td><span style="background-color:yellow">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+                else
+                {
+                    <td><span style="background-color:white">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.Date)
             </td>
