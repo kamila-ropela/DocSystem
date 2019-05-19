@@ -1,15 +1,10 @@
 ﻿@model IEnumerable<DocSystem.Models.Visit>
 
-@{
-    ViewData["Title"] = "VisitList";
-}
-
 <h2>Visits</h2>
 
 <table class="table">
     <thead>
         <tr>
-            
             <th>
                 @Html.DisplayNameFor(model => model.DoctorName)
             </th>
@@ -25,13 +20,11 @@
             <th>
                 @Html.DisplayNameFor(model => model.Date)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
-           
             <td>
                 @Html.DisplayFor(modelItem => item.DoctorName)
             </td>

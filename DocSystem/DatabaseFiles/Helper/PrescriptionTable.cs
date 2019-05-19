@@ -6,7 +6,22 @@ namespace DocSystem.DatabaseFiles.Helper
 {
     public static class PrescriptionTable
     {
-   
+
+        public static List<Prescription> GetPrescriptByMedicine(string name)
+        {
+            return Properties.dbContext.GetPrescriptionDb($@"SELECT Prescription.Id,
+                                                            Prescription.PatientId,
+                                                            Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                            Prescription.Medicine,
+                                                            Prescription.Description,
+                                                            Prescription.Date,
+                                                            Prescription.Refund
+                                                     FROM Prescription
+                                                     INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
+                                                     INNER JOIN Patient ON Prescription.PatientId = Patient.Id
+                                                     WHERE Prescription.Medicine = '{name}'");
+
+        }
 
         public static List<Prescription> GetDataByPatientId(int id)
         {
@@ -20,11 +35,25 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      FROM Prescription
                                                      INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
                                                      INNER JOIN Patient ON Prescription.PatientId = Patient.Id
-                                                     WHERE Prescription.Id = {id}");
+                                                     WHERE Prescription.PatientId = {id}");
 
         }
 
+        public static List<Prescription> GetDataByDoctorId(int id,int pid)
+        {
+            return Properties.dbContext.GetPrescriptionDb($@"SELECT Prescription.Id,
+                                                            Prescription.PatientId,
+                                                            Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                            Prescription.Medicine,
+                                                            Prescription.Description,
+                                                            Prescription.Date,
+                                                            Prescription.Refund
+                                                     FROM Prescription
+                                                     INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
+                                                     INNER JOIN Patient ON Prescription.PatientId = Patient.Id
+                                                     WHERE Prescription.DoctorId = {id} AND Prescription.PatientId = {pid} ");
 
+        }
 
 
         public static List<Prescription> DoctorPrescription(int patientId, int doctorId, string medicine, string description, DateTime date, string refund)
