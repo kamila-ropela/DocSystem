@@ -68,8 +68,13 @@ namespace DocSystem.Controllers
             return View(); 
         }
     
-        public IActionResult AddDocumentationView()
+        public IActionResult AddDocumentationView(int id)
         {
+            ViewBag.var = id;
+
+            var patients = PatientTable.GetPatientById(patientId);
+
+            ViewData["patient"] = patients[0];
             return View();
         }
 
@@ -77,8 +82,7 @@ namespace DocSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddDocumentationView([FromForm]Documentation documentation)
         {
-            Properties.UserId = 1;
-            documentation.PatientId = 2;
+
             DocumentationTable.InsertData(Properties.UserId, documentation);
             return View();
         }
@@ -139,11 +143,7 @@ namespace DocSystem.Controllers
 
             ViewData["patient"] = patients[0];
 
-            return View();
-
-
-
-            
+            return View();       
         }
 
         [HttpPost]
@@ -152,12 +152,9 @@ namespace DocSystem.Controllers
         {
             var patients = PatientTable.GetPatientById(patientId);
 
-
             DateTime time = DateTime.Now.Date;
            // string date = time.ToString("yyyy-MM-dd");
             PrescriptionTable.InsertData( patients[0].Id, Properties.UserId, presc.Medicine, presc.Description, time, presc.Refund);
-
-
             return View();
 
         }
