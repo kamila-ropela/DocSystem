@@ -6,6 +6,14 @@
 
 @Html.Partial("PatientName", ViewData["PatientName"])
 
+<form asp-action="PatientView">
+    <p>
+    <p>What are you looking for...?</p>
+    <input type="text" name="SearchString">
+    <button type="submit" class="btn btn-primary">Submit</button>
+    </p>
+</form>
+
 @Html.Partial("VisitList", ViewData["visitData"])
 @Html.Partial("PrescriptionList", ViewData["prescriptioneData"])
 @Html.Partial("PatientTests", ViewData["Tests"])

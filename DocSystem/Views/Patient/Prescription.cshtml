@@ -1,0 +1,53 @@
+﻿@model DocSystem.Models.Prescription
+
+@{
+    ViewData["Title"] = "Prescription";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm("SubmitAction", "Patient", FormMethod.Post))
+{
+    <div>
+        <h4>Prescription</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.DoctorName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DoctorName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Medicine)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Medicine)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Description)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Description)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Refund)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Refund)
+            </dd>
+        </dl>
+
+    </div>
+    <input id="url" type="hidden" style="width: 90%;" value="" name="TxtUrl" />
+    <script>
+        var test = "https://localhost:44358/Patient/Prescription/" + @ViewBag.var;
+        document.getElementById("url").value = test;
+    </script>
+    <input class="input-lg" type="submit" name="BtnConvert" value="Create PDF" class="mybutton" />
+
+}

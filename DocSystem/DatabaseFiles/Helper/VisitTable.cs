@@ -51,6 +51,23 @@ namespace DocSystem.DatabaseFiles.Helper
           
         }
 
+        public static List<Visit> GetDataByDoctorId(int id, int pid)
+        {
+            return Properties.dbContext.GetVisitDb($@"SELECT Visit.Id,
+                                                            Concat(Patient.Name, ' ', Patient.Surname) AS PatientName,
+                                                            Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                            Visit.Type,
+                                                            Visit.Doctor,
+                                                            Visit.Status,
+                                                            Visit.Date
+                                                     FROM Visit
+                                                     INNER JOIN Patient ON Visit.PatientId = Patient.Id
+                                                     INNER JOIN Doctor ON Visit.DoctorId = Doctor.Id
+                                                     WHERE Visit.DoctorId = {id} AND Visit.PatientId = {pid}");
+
+        }
+
+
         public static List<Visit> DoctorVisit ( int patientId, int doctorId, string type, string doctor, string status, String date)
         {
             return Properties.dbContext.GetVisitDb($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Status, Date) 
