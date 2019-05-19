@@ -215,6 +215,17 @@ namespace Patients.Controllers
 
             return Json(data);
         }
+        public IActionResult SickLeave(int id, int patientId)
+        {
+            ViewBag.id = id;
+            ViewBag.patientId = patientId;
+
+            var data = SickLeaveTable.GetData(id);
+            var patientData = PatientTable.GetPatientById(patientId);
+
+            ViewData["PatientName"] = patientData[0];
+            return View(data[0]);
+        }
         public ActionResult Course()
         {
             List<Documentation> docList = new List<Documentation>();
