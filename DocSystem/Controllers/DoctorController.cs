@@ -7,6 +7,8 @@ using System.Text.RegularExpressions;
 using System.Data;
 using System.Linq;
 using DocSystem.DatabaseFiles;
+using SelectPdf;
+using Microsoft.AspNetCore.Http;
 
 namespace DocSystem.Controllers
 {

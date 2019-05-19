@@ -1,0 +1,62 @@
+﻿@model DocSystem.Models.Visit
+
+@{
+    ViewData["Title"] = "Visit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("SubmitAction", "Patient", FormMethod.Post))
+{
+    <h2>Visit</h2>
+
+    <div>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.PatientName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.PatientName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.DoctorName)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.DoctorName)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Type)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Type)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Doctor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Doctor)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Status)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Status)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.Date)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.Date)
+            </dd>
+        </dl>
+    </div>
+
+    <input id="url" type="hidden" style="width: 90%;" value="" name="TxtUrl" />
+    <script>
+        var test = "https://localhost:44358/Patient/Visit/" + @ViewBag.var;
+        document.getElementById("url").value = test;
+    </script>
+    <input class="input-lg" type="submit" name="BtnConvert" value="Create PDF" class="mybutton" />
+
+}
