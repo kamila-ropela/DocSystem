@@ -8,12 +8,49 @@ using System.Linq;
 using DocSystem.DatabaseFiles;
 using System.Text.RegularExpressions;
 using System.Globalization;
+using Microsoft.AspNetCore.Http;
+using SelectPdf;
 
 namespace Patients.Controllers
 {
     public class PatientController : Controller
     {
         public static string nameOfTest;
+
+        public IActionResult Visit(int id)
+        {
+            ViewBag.var = id;
+
+            var data = VisitTable.GetDataById(id);
+
+            Visit visitData = new Visit()
+            {
+                PatientName = data[0].PatientName,
+                DoctorName = data[0].DoctorName,
+                Doctor = data[0].Doctor,
+                Status = data[0].Status,
+                Type = data[0].Type,
+                Date = data[0].Date
+            };
+
+            return View(visitData);
+        }
+
+        [HttpPost]
+        public ActionResult SubmitAction(IFormCollection collection)
+        {
+         
+            HtmlToPdf converter = new HtmlToPdf();
+           
+            PdfDocument doc = converter.ConvertUrl(collection["TxtUrl"]);
+            byte[] pdf = doc.Save();
+            doc.Close();
+
+            FileResult fileResult = new FileContentResult(pdf, "application/pdf");
+            fileResult.FileDownloadName = "Document.pdf";
+            return fileResult;
+          
+        }
 
         [HttpPost]
         public ActionResult PatientView([FromForm]string searchString)
