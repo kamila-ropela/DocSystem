@@ -6,12 +6,75 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using DocSystem.DatabaseFiles;
+using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace Patients.Controllers
 {
     public class PatientController : Controller
     {
         public static string nameOfTest;
+
+        [HttpPost]
+        public ActionResult PatientView([FromForm]string searchString)
+        {
+
+            try
+            {
+                if (Regex.IsMatch(searchString, @"^[a-zA-Z]+$"))
+                {
+                    List<Doctor> doctor = DoctorTable.GetDoctorIdBySurname(searchString);
+                    if (doctor.Count != 0)
+                    {
+                        int doctorId = doctor[0].Id;
+
+                        var visit = VisitTable.GetDataByDoctorId(doctorId, Properties.UserId);
+                        var prescript = PrescriptionTable.GetDataByDoctorId(doctorId, Properties.UserId);
+                        var test = TestTable.GetDataByDoctorId(doctorId, Properties.UserId);
+                        var sickleave = SickLeaveTable.GetDataByDoctorId(doctorId, Properties.UserId);
+                        var description = MedicalDescriptionTable.GetDataByDoctorId(doctorId, Properties.UserId);
+                        var doc = DocumentationTable.GetDataByDoctorId(doctorId, Properties.UserId);
+
+                        ViewData["PatientName"] = PatientTable.GetPatientById(Properties.UserId)[0];
+                        ViewData["visitData"] = visit;
+                        ViewData["prescriptioneData"] = prescript;
+                        ViewData["Tests"] = test;
+                        ViewData["sickLeaveData"] = sickleave;
+                        ViewData["medicalDescription"] = description;
+                        ViewData["documentation"] = doc;
+                        return View();
+                    }
+                    else
+                    {
+                        ViewData["PatientName"] = PatientTable.GetPatientById(Properties.UserId)[0];
+                        ViewData["visitData"] = new List<Visit>();
+                        ViewData["prescriptioneData"] = new List<Prescription>();
+                        ViewData["Tests"] = new List<Test>();
+                        ViewData["sickLeaveData"] = new List<SickLeave>();
+                        ViewData["medicalDescription"] = new List<MedicalDescription>();
+                        ViewData["documentation"] = new List<Documentation>();
+
+                        var prescript = PrescriptionTable.GetPrescriptByMedicine(searchString);
+                        if (prescript.Count != 0) {
+                            ViewData["prescriptioneData"] = prescript;
+                        }
+
+                        var des = MedicalDescriptionTable.GetData(Properties.UserId, searchString);
+                        if (des.Count != 0)
+                        {
+                            ViewData["medicalDescription"] = des;
+                        }
+
+                        View(); 
+                    }
+                }
+                return View(); 
+            }
+            catch
+            {
+                return View();
+            }
+        }
 
         public ActionResult PatientView(Patient patient)
 

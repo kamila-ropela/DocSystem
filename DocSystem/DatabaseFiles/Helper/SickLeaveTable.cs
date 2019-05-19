@@ -21,6 +21,21 @@ namespace DocSystem.DatabaseFiles.Helper
                                                 
         }
 
+        public static List<SickLeave> GetDataByDoctorId(int id,int pid)
+        {
+            return Properties.dbContext.GetSickLeaveDb($@"SELECT SickLeave.Id,
+                                                     SickLeave.PatientId,
+                                                     Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                     SickLeave.Days,
+                                                     SickLeave.Description,
+                                                     SickLeave.Date
+                                                     FROM SickLeave
+                                                     INNER JOIN Patient ON SickLeave.PatientId = Patient.Id
+                                                     INNER JOIN Doctor ON SickLeave.DoctorId = Doctor.Id
+                                                     WHERE  SickLeave.DoctorId = {id} AND  SickLeave.PatientId = {pid}");
+
+        }
+
         public static List<SickLeave> GetData(int id)
         {
             return Properties.dbContext.GetSickLeaveDb($@"SELECT SickLeave.Id,
