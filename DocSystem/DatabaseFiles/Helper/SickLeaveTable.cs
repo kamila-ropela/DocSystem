@@ -9,6 +9,7 @@ namespace DocSystem.DatabaseFiles.Helper
         public static List<SickLeave> GetDataByPatientId(int id)
         {
             return Properties.dbContext.GetSickLeaveDb($@"SELECT SickLeave.Id,
+                                                     SickLeave.PatientId,
                                                      Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
                                                      SickLeave.Days,
                                                      SickLeave.Description,
@@ -18,6 +19,22 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      INNER JOIN Doctor ON SickLeave.DoctorId = Doctor.Id
                                                      WHERE  SickLeave.PatientId = {id}");
                                                 
+        }
+
+        public static List<SickLeave> GetData(int id)
+        {
+            return Properties.dbContext.GetSickLeaveDb($@"SELECT SickLeave.Id,
+                                                   
+                                                     SickLeave.PatientId
+                                                      Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                     SickLeave.Days,
+                                                     SickLeave.Description,
+                                                     SickLeave.Date
+                                                     FROM SickLeave
+                                                     INNER JOIN Patient ON SickLeave.PatientId = Patient.Id
+                                                     INNER JOIN Doctor ON SickLeave.DoctorId = Doctor.Id
+                                                     WHERE  SickLeave.Id = {id}");
+
         }
 
 

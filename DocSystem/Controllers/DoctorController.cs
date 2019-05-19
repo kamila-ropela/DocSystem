@@ -143,11 +143,7 @@ namespace DocSystem.Controllers
 
             ViewData["patient"] = patients[0];
 
-            return View();
-
-
-
-            
+            return View();       
         }
 
         [HttpPost]
@@ -156,12 +152,9 @@ namespace DocSystem.Controllers
         {
             var patients = PatientTable.GetPatientById(patientId);
 
-
             DateTime time = DateTime.Now.Date;
            // string date = time.ToString("yyyy-MM-dd");
             PrescriptionTable.InsertData( patients[0].Id, Properties.UserId, presc.Medicine, presc.Description, time, presc.Refund);
-
-
             return View();
 
         }

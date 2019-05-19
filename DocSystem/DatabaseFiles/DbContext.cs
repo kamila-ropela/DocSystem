@@ -155,7 +155,7 @@ namespace DocSystem.DatabaseFiles
                             PatientId = Convert.ToInt32(reader["PatientId"]),
                             DoctorName = reader["DoctorName"].ToString(),
                             Disease = reader["Disease"].ToString(),
-                            Date = DateTime.Now
+                            Date = Convert.ToDateTime(reader["Date"])
                         });
                     }
                 }
