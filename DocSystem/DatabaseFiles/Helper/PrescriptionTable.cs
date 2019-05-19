@@ -39,6 +39,22 @@ namespace DocSystem.DatabaseFiles.Helper
 
         }
 
+        public static List<Prescription> GetDataById(int id)
+        {
+            return Properties.dbContext.GetPrescriptionDb($@"SELECT Prescription.Id,
+                                                            Prescription.PatientId,
+                                                            Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                            Prescription.Medicine,
+                                                            Prescription.Description,
+                                                            Prescription.Date,
+                                                            Prescription.Refund
+                                                     FROM Prescription
+                                                     INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
+                                                     INNER JOIN Patient ON Prescription.PatientId = Patient.Id
+                                                     WHERE Prescription.Id = {id}");
+
+        }
+
         public static List<Prescription> GetDataByDoctorId(int id,int pid)
         {
             return Properties.dbContext.GetPrescriptionDb($@"SELECT Prescription.Id,

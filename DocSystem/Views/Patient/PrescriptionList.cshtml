@@ -32,8 +32,8 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            
-           
+
+
             <td>
                 @Html.DisplayFor(modelItem => item.DoctorName)
             </td>
@@ -48,6 +48,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Refund)
+            </td>
+            <td>
+                @Html.ActionLink("Show", "Prescription", new { id = item.Id })
             </td>
         </tr>
 }

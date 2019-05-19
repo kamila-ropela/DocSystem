@@ -155,12 +155,24 @@ namespace Patients.Controllers
 
         public IActionResult Results(int id)
         {
+            ViewBag.var = id; 
+
             DateTime date = DateTime.Now;
             Result res = new Result { Id = 1, Name="H2O",TestId=111, Unit="mm",Value=100};
             List<Result> list = new List<Result>();
             list.Add(res);
             return View(list);
         }
+
+        public IActionResult Prescription(int id)
+        {
+            ViewBag.var = id;
+
+            var data = PrescriptionTable.GetDataById(id);
+
+            return View(data[0]);
+        }
+
         public ActionResult ChartView(string name)
         {
             nameOfTest = name;
