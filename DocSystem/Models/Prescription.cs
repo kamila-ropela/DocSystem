@@ -17,6 +17,14 @@ namespace DocSystem.Models
 
         public DateTime Date { get; set; }
 
-        public int Refund { get; set; }
+        public string Refund { get; set; }
+        
+
+
+
     }
+    
+
+
+  
 }

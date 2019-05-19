@@ -19,14 +19,15 @@ namespace DocSystem.DatabaseFiles.Helper
                                                             Prescription.Refund
                                                      FROM Prescription
                                                      INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
-                                                     WHERE Prescription.PatientId = {id}");
+                                                     INNER JOIN Patient ON Prescription.PatientId = Patient.Id
+                                                     WHERE Prescription.Id = {id}");
 
         }
 
 
 
 
-        public static List<Prescription> DoctorPrescription(int patientId, int doctorId, string medicine, string description, DateTime date, int refund)
+        public static List<Prescription> DoctorPrescription(int patientId, int doctorId, string medicine, string description, DateTime date, string refund)
         {
             return Properties.dbContext.GetPrescriptionDb($@"INSERT INTO Prescription (PatientId, DoctorId, Medicine, Description, Date, Refund) 
                                                      VALUES ('" + patientId + "," + doctorId + "," +
@@ -35,18 +36,16 @@ namespace DocSystem.DatabaseFiles.Helper
     
 
 
-        public static void InsertData(int doctorId, Prescription prescription)
+
+        public static void InsertData(int patientId, int doctorId, string medicine, string description, DateTime date, string refund)
         {
-            Properties.dbContext.ExecuteQuery($@"INSERT INTO Prescription (PatientId, DoctorId, Medicine, Description, Date, Refund) 
-                                                     VALUES ('" + prescription.PatientId + "','" + doctorId + "','" +
-                                                     prescription.Medicine + "','" + prescription.Description + "','" + prescription.Date + "','"+ prescription.Refund + "');");
-
-
-
+            Properties.dbContext.ExecuteQuery($@"INSERT INTO  Prescription(PatientId, DoctorId, Medicine, Description, Date, Refund) 
+                                                     VALUES ({patientId},{doctorId},'{medicine}','{description}','{date}','{refund}')");
         }
-        
 
-        public static List<Prescription> GetData()
+
+
+        public static List<Prescription> GetData(int id)
         {
             return Properties.dbContext.GetPrescriptionDb($@"SELECT Prescription.Id,
                                                             Prescription.PatientId,
@@ -56,7 +55,9 @@ namespace DocSystem.DatabaseFiles.Helper
                                                             Prescription.Date,
                                                             Prescription.Refund
                                                      FROM Prescription
-                                                     INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id");
+                                                     INNER JOIN Doctor ON Prescription.DoctorId = Doctor.Id
+                                                    INNER JOIN Patient ON Prescription.PatientId = Patient.Id
+                                                     WHERE Prescription.PatientId = {id}"); 
         }
 
     }

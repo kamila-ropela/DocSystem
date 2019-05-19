@@ -15,6 +15,7 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      MedicalDescription.Date
                                                      FROM MedicalDescription
                                                      INNER JOIN Doctor ON MedicalDescription.DoctorId = Doctor.Id
+                                                     INNER JOIN Patient ON MedicalDescription.PatientId = Patient.Id
                                                      WHERE MedicalDescription.PatientId = {id}");
         }
 
@@ -23,5 +24,15 @@ namespace DocSystem.DatabaseFiles.Helper
             Properties.dbContext.ExecuteQuery($@"INSERT INTO  MedicalDescription(PatientId,DoctorId,Type, Description, Date) 
                                                      VALUES ({patientId},{doctorId},'{type}','{description}','{date}')");
         }
+
+        public static List<MedicalDescription> MedicalDescription(int patientId, int doctorId, string type, string description, DateTime date)
+        {
+            return Properties.dbContext.GetMedicalDescriptionDb($@"INSERT INTO Prescription (PatientId, DoctorId, Type, Description, Date) 
+                                                     VALUES ('" + patientId + "," + doctorId + "," +
+                                                      type + "," + description + "','CURDATE()');");
+        }
+
+
+
     }
 }
