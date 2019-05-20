@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
 using SelectPdf;
+using System.Dynamic;
 
 namespace Patients.Controllers
 {
@@ -226,23 +227,46 @@ namespace Patients.Controllers
             ViewData["PatientName"] = patientData[0];
             return View(data[0]);
         }
-        public ActionResult Course()
+        public ActionResult Course(int id)
         {
-            List<Documentation> docList = new List<Documentation>();
-            List<Documentation> diseaseList = new List<Documentation>();
+            List<Visit> visitList = new List<Visit>();
+            List<Test> testList = new List<Test>();
+            List<Visit> tmpV = new List<Visit>();
+            List<Test> tmpT = new List<Test>();
+            visitList.AddRange(VisitTable.GetDataByPatientId(Properties.UserId));
+            testList.AddRange(TestTable.GetDataByPatientId(Properties.UserId));
+            dynamic output = new ExpandoObject();
 
-            Properties.UserId = 9;
-            docList.Add(new Documentation {Id = 0, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now});
-            docList.Add(new Documentation { Id = 1, DoctorName = "", PatientId = 9, Disease = "b", Date = DateTime.Now });
-            docList.Add(new Documentation { Id = 2, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now });
-
-            //docList.AddRange(DocumentationTable.GetDataByPatientId(Properties.UserId));
-            var tmp = docList.Select(documentation => documentation.Disease).Distinct();
-            foreach (var item in tmp)
+            id--;
+            Visit currentVisit = new Visit();
+            currentVisit = visitList[id];
+            visitList.RemoveRange(0,id);
+            
+            
+            foreach(Visit v in visitList)
             {
-                diseaseList.Add(new Documentation {Disease = item });
+                if (currentVisit.DoctorName == v.DoctorName && DateTime.Compare(currentVisit.Date, v.Date) <= 0)
+                {
+                    try
+                    {
+                        foreach (Test t in testList)
+                        {
+                            if (currentVisit.DoctorName == t.DoctorName && DateTime.Compare(currentVisit.Date, t.Date) <= 0)
+                            {
+                                tmpT.Add(t);
+                                testList.Remove(t);
+                                break;
+                            }
+                        }
+                    }
+                    catch { }
+                    currentVisit = v;
+                    tmpV.Add(v);
+                }  
             }
-            return View(diseaseList);
+            output.Visit = tmpV;
+            output.Test = tmpT;
+            return View(output);
         }
     }
 }
