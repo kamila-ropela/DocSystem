@@ -39,9 +39,8 @@ namespace DocSystem.DatabaseFiles.Helper
         public static List<SickLeave> GetData(int id)
         {
             return Properties.dbContext.GetSickLeaveDb($@"SELECT SickLeave.Id,
-                                                   
-                                                     SickLeave.PatientId
-                                                      Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                     SickLeave.PatientId,
+                                                     Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
                                                      SickLeave.Days,
                                                      SickLeave.Description,
                                                      SickLeave.Date

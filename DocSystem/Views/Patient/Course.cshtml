@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DocSystem.Models.Documentation>
+﻿@model dynamic
 
 @{
     ViewData["Title"] = "Course";
@@ -6,20 +6,75 @@
 }
 
 <div>
+    <h3>Visits</h3>
     <table class="table">
-        <tr>
-            <th>
-                Disease
-            </th>
-        </tr>
-        @foreach (var item in Model)
+        <thead>
+            <th>Doctor name</th>
+            <th>Type</th>
+            <th>Doctor</th>
+            <th>Status</th>
+            <th>Date</th>
+        </thead>
+        @foreach (Visit item in Model.Visit)
         {
             <tr>
-                <td>@item.Disease</td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Disease })
+                    @Html.DisplayFor(modelItem => item.DoctorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Doctor)
+                </td>
+                @{ if (item.Status == "done")
+                    {
+                        <td><span style="background-color:green">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+                    else if (item.Status == "pending")
+                    {
+                        <td><span style="background-color:red">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+                    else if (item.Status == "in progress")
+                    {
+                        <td><span style="background-color:yellow">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+                    else
+                    {
+                        <td><span style="background-color:white">@Html.DisplayFor(modelItem => item.Status) </span></td>}
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.ActionLink("Show", "Visit", new { id = item.Id })
+                </td>
+                <td>
+                    @Html.ActionLink("Related visits & tests", "Course", new { id = item.Id })
                 </td>
             </tr>
         }
-        </table>
+    </table>
+</div>
+<div>
+    <h3>Tests</h3>
+    <table class="table">
+        <thead>
+            <th>DoctorName</th>
+            <th>Description</th>
+            <th>Date</th>
+        </thead>
+        @foreach (Test item in Model.Test)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DoctorName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+            </tr>
+        }
+    </table>
+
 </div>
