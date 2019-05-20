@@ -219,11 +219,11 @@ namespace DocSystem.Controllers
       
         public IActionResult Results(int id)
         {
-            DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name = "H2O", TestId = 111, Unit = "mm", Value = 100 };
-            List<Result> list = new List<Result>();
-            list.Add(res);
-            return View(list);
+            ViewBag.var = id;
+
+            IEnumerable<Result> data = ResultTable.GetDataByTestId(id);
+
+            return View(data);
         }
 
         public ActionResult ChartView(string name)
