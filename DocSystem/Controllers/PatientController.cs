@@ -145,24 +145,22 @@ namespace Patients.Controllers
             return View();
         }
 
-        public ActionResult PatientTests()
+        public ActionResult PatientTests(int id)
         {
-            DateTime date = DateTime.Now;
-            Test test = new Test { Id = 1, Date = date, Description = "", DoctorName = "", PatientId = 1};
-            List<Test> list = new List<Test>();
-            list.Add(test);
-            return View(list);
+            ViewBag.var = id;
+
+            var data = TestTable.GetDataByPatientId(id);
+
+            return View(data[0]);
         }
 
         public IActionResult Results(int id)
         {
-            ViewBag.var = id; 
+            ViewBag.var = id;
 
-            DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name="H2O",TestId=111, Unit="mm",Value=100};
-            List<Result> list = new List<Result>();
-            list.Add(res);
-            return View(list);
+            IEnumerable<Result> data = ResultTable.GetDataByTestId(id);
+
+            return View(data);
         }
 
         public IActionResult Prescription(int id)
