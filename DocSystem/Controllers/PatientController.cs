@@ -10,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Globalization;
 using Microsoft.AspNetCore.Http;
 using SelectPdf;
+using System.Dynamic;
 
 namespace Patients.Controllers
 {
@@ -144,24 +145,22 @@ namespace Patients.Controllers
             return View();
         }
 
-        public ActionResult PatientTests()
+        public ActionResult PatientTests(int id)
         {
-            DateTime date = DateTime.Now;
-            Test test = new Test { Id = 1, Date = date, Description = "", DoctorName = "", PatientId = 1};
-            List<Test> list = new List<Test>();
-            list.Add(test);
-            return View(list);
+            ViewBag.var = id;
+
+            var data = TestTable.GetDataByPatientId(id);
+
+            return View(data[0]);
         }
 
         public IActionResult Results(int id)
         {
-            ViewBag.var = id; 
+            ViewBag.var = id;
 
-            DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name="H2O",TestId=111, Unit="mm",Value=100};
-            List<Result> list = new List<Result>();
-            list.Add(res);
-            return View(list);
+            IEnumerable<Result> data = ResultTable.GetDataByTestId(id);
+
+            return View(data);
         }
 
         public IActionResult Prescription(int id)
@@ -215,23 +214,57 @@ namespace Patients.Controllers
 
             return Json(data);
         }
-        public ActionResult Course()
+        public IActionResult SickLeave(int id, int patientId)
         {
-            List<Documentation> docList = new List<Documentation>();
-            List<Documentation> diseaseList = new List<Documentation>();
+            ViewBag.id = id;
+            ViewBag.patientId = patientId;
 
-            Properties.UserId = 9;
-            docList.Add(new Documentation {Id = 0, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now});
-            docList.Add(new Documentation { Id = 1, DoctorName = "", PatientId = 9, Disease = "b", Date = DateTime.Now });
-            docList.Add(new Documentation { Id = 2, DoctorName = "", PatientId = 9, Disease = "a", Date = DateTime.Now });
+            var data = SickLeaveTable.GetData(id);
+            var patientData = PatientTable.GetPatientById(patientId);
 
-            //docList.AddRange(DocumentationTable.GetDataByPatientId(Properties.UserId));
-            var tmp = docList.Select(documentation => documentation.Disease).Distinct();
-            foreach (var item in tmp)
+            ViewData["PatientName"] = patientData[0];
+            return View(data[0]);
+        }
+        public ActionResult Course(int id)
+        {
+            List<Visit> visitList = new List<Visit>();
+            List<Test> testList = new List<Test>();
+            List<Visit> tmpV = new List<Visit>();
+            List<Test> tmpT = new List<Test>();
+            visitList.AddRange(VisitTable.GetDataByPatientId(Properties.UserId));
+            testList.AddRange(TestTable.GetDataByPatientId(Properties.UserId));
+            dynamic output = new ExpandoObject();
+
+            id--;
+            Visit currentVisit = new Visit();
+            currentVisit = visitList[id];
+            visitList.RemoveRange(0,id);
+            
+            
+            foreach(Visit v in visitList)
             {
-                diseaseList.Add(new Documentation {Disease = item });
+                if (currentVisit.DoctorName == v.DoctorName && DateTime.Compare(currentVisit.Date, v.Date) <= 0)
+                {
+                    try
+                    {
+                        foreach (Test t in testList)
+                        {
+                            if (currentVisit.DoctorName == t.DoctorName && DateTime.Compare(currentVisit.Date, t.Date) <= 0)
+                            {
+                                tmpT.Add(t);
+                                testList.Remove(t);
+                                break;
+                            }
+                        }
+                    }
+                    catch { }
+                    currentVisit = v;
+                    tmpV.Add(v);
+                }  
             }
-            return View(diseaseList);
+            output.Visit = tmpV;
+            output.Test = tmpT;
+            return View(output);
         }
     }
 }

@@ -12,6 +12,12 @@ namespace DocSystem.DatabaseFiles.Helper
                                                         WHERE Name = '{name}' 
                                                         AND TestId = {testId}");
         }
+         public static List<Result> GetDataByTestId(int testId)
+        {
+            return Properties.dbContext.GetResultDb($@"SELECT *
+                                                        FROM Result
+                                                        WHERE TestId = {testId}");
+        }
         public static List<Result> AddResults(Result result)
         {
             return Properties.dbContext.GetResultDb($@"INSERT INTO Result (TestId, Name, Unit, Value) 
