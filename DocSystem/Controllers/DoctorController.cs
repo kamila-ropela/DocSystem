@@ -175,7 +175,6 @@ namespace DocSystem.Controllers
             var patients = PatientTable.GetPatientById(patientId);
 
             DateTime time = DateTime.Now;
-            // string date = time.ToString("yyyy-MM-dd");
 
             if (visits.Type == "visit")
                 visits.Status = "in progress";

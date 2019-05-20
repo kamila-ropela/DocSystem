@@ -52,7 +52,7 @@ namespace DocSystem.DatabaseFiles.Helper
         {
             Properties.dbContext.ExecuteQuery($@"INSERT INTO Documentation (PatientId, DoctorId, Disease, Date) 
                                                      VALUES (" + documentation.PatientId +"," + doctorId + ",'" +
-                                                     documentation.Disease + "','" + documentation.Date + "');");
+                                                     documentation.Disease + "', Now());");
         }
     }
 }
