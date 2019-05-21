@@ -51,6 +51,23 @@ namespace DocSystem.DatabaseFiles.Helper
           
         }
 
+        public static List<Visit> GetDataByPatientIdAndSpecialization(int id, string specialization)
+        {
+            return Properties.dbContext.GetVisitDb($@"SELECT Visit.Id,
+                                                            Concat(Patient.Name, ' ', Patient.Surname) AS PatientName,
+                                                            Concat(Doctor.Name, ' ', Doctor.Surname) AS DoctorName,
+                                                            Visit.Type,
+                                                            Visit.Doctor,
+                                                            Visit.Status,
+                                                            Visit.Date
+                                                     FROM Visit
+                                                     INNER JOIN Patient ON Visit.PatientId = Patient.Id
+                                                     INNER JOIN Doctor ON Visit.DoctorId = Doctor.Id
+                                                     WHERE Visit.PatientId = {id} AND 
+                                                           Visit.Doctor = '{specialization}'");
+
+        }
+
         public static List<Visit> GetDataByDoctorId(int id, int pid)
         {
             return Properties.dbContext.GetVisitDb($@"SELECT Visit.Id,
@@ -81,7 +98,10 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      VALUES ({patientId},{doctorId},'{type}','{doctor}','{status}',Now())");
         }
 
-
+        public static void EditVisitById(int id, string status)
+        {
+            Properties.dbContext.ExecuteQuery($@"updated Visit set Status = '{status}' where Id = {id}");
+        }
 
 
 

@@ -121,8 +121,10 @@ namespace DocSystem.Controllers
         public IActionResult DoctorView(Patient patient)
         {
             patientId = patient.Id;
+            var doctorSpecialization = DoctorTable.GetSpecializationById(Properties.UserId);
 
-            List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
+
+            List<Visit> visits = VisitTable.GetDataByPatientIdAndSpecialization(patient.Id, doctorSpecialization[0].Specialization);
             List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
             List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
             List<Documentation> docs = DocumentationTable.GetDataByPatientId(patient.Id);
