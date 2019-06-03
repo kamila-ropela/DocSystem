@@ -29,7 +29,7 @@ namespace DocSystem.Controllers
             IList<string> values;
             values = result["Value"];
             for(int i = 0; i < names.Count; i++) {
-                if (names[i] == "")
+                if (names[i] == "" || names[i] == null || names[i] == "Select name")
                     break;
                 res.Name = names[i];
                 res.Unit = units[i];

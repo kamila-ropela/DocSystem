@@ -5,9 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>View</h2>
-
-<h4>Result</h4>
+<h4>Results</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -19,23 +17,34 @@
                 <span asp-validation-for="TestId" class="text-danger"></span>
             </div>
 
-            @for(int i = 0; i<10; i++) {
-                <br/><br/>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Unit" class="control-label"></label>
-                <input asp-for="Unit" class="form-control" />
-                <span asp-validation-for="Unit" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Value" class="control-label"></label>
-                <input asp-for="Value" class="form-control" />
-                <span asp-validation-for="Value" class="text-danger"></span>
-            </div>
+            @for (int i = 0; i < 10; i++)
+            {
+                <br /><br />
+                <div class="form-group" name="Name">
+                    <label asp-for="Name" class="control-label"></label><br />
+                    <select asp-for="Name">
+                        <option>Select name</option>
+                        <option value="Red blood cell count">Red blood cell count</option>
+                        <option value="Hemoglobin">Hemoglobin</option>
+                        <option value="Hematocrit">Hematocrit</option>
+                        <option value="White blood cell count">White blood cell count</option>
+                    </select>
+                </div>
+                <div class="form-group" name="Unit">
+                    <label asp-for="Unit" class="control-label"></label><br />
+                    <select asp-for="Unit">
+                        <option>Select name</option>
+                        <option value="G/l">G/l</option>
+                        <option value="T/l">T/l</option>
+                        <option value="g/dl">g/dl</option>
+                        <option value="%">%</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Value" class="control-label"></label>
+                    <input asp-for="Value" class="form-control" />
+                    <span asp-validation-for="Value" class="text-danger"></span>
+                </div>
             }
             <div class="form-group">
                 <input type="submit" value="Add" class="btn btn-default" />

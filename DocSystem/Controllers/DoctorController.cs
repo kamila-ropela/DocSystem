@@ -176,14 +176,19 @@ namespace DocSystem.Controllers
 
             var patients = PatientTable.GetPatientById(patientId);
 
-            DateTime time = DateTime.Now;
-
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
             if (visits.Type == "visit")
                 visits.Status = "in progress";
             else if (visits.Type == "referral")
                 visits.Status = "pending";
+            else if (visits.Type == "test")
+            {
+                TestTable.InsertData(Properties.UserId, patientId, "", date); 
+                visits.Status = "pending";
+            }
 
-            VisitTable.InsertD(patients[0].Id, Properties.UserId, visits.Type, visits.Doctor, visits.Status, time);
+            VisitTable.InsertD(patients[0].Id, Properties.UserId, visits.Type, visits.Doctor, visits.Status, date);
 
             return View();
 
