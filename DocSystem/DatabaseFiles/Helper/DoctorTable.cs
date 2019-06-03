@@ -14,5 +14,15 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      FROM Doctor
                                                      WHERE Doctor.Surname = '{surname}'");
         }
+
+        public static List<Doctor> GetSpecializationById(int id)
+        {
+            return Properties.dbContext.GetDoctorDb($@"SELECT Doctor.Id,
+                                                     Doctor.Name,
+                                                     Doctor.Surname,
+                                                     Doctor.Specialization
+                                                     FROM Doctor
+                                                     WHERE Doctor.Id = '{id}'");
+        }
     }
 }

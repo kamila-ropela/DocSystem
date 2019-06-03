@@ -121,8 +121,10 @@ namespace DocSystem.Controllers
         public IActionResult DoctorView(Patient patient)
         {
             patientId = patient.Id;
+            var doctorSpecialization = DoctorTable.GetSpecializationById(Properties.UserId);
 
-            List<Visit> visits = VisitTable.GetDataByPatientId(patient.Id);
+
+            List<Visit> visits = VisitTable.GetDataByPatientIdAndSpecialization(patient.Id, doctorSpecialization[0].Specialization);
             List<Prescription> prescriptions = PrescriptionTable.GetDataByPatientId(patient.Id);
             List<Test> tests = TestTable.GetDataByPatientId(patient.Id);
             List<Documentation> docs = DocumentationTable.GetDataByPatientId(patient.Id);
@@ -174,15 +176,19 @@ namespace DocSystem.Controllers
 
             var patients = PatientTable.GetPatientById(patientId);
 
-            DateTime time = DateTime.Now;
-            // string date = time.ToString("yyyy-MM-dd");
-
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
             if (visits.Type == "visit")
                 visits.Status = "in progress";
             else if (visits.Type == "referral")
                 visits.Status = "pending";
+            else if (visits.Type == "test")
+            {
+                TestTable.InsertData(Properties.UserId, patientId, "", date); 
+                visits.Status = "pending";
+            }
 
-            VisitTable.InsertD(patients[0].Id, Properties.UserId, visits.Type, visits.Doctor, visits.Status, time);
+            VisitTable.InsertD(patients[0].Id, Properties.UserId, visits.Type, visits.Doctor, visits.Status, date);
 
             return View();
 
@@ -220,11 +226,11 @@ namespace DocSystem.Controllers
       
         public IActionResult Results(int id)
         {
-            DateTime date = DateTime.Now;
-            Result res = new Result { Id = 1, Name = "H2O", TestId = 111, Unit = "mm", Value = 100 };
-            List<Result> list = new List<Result>();
-            list.Add(res);
-            return View(list);
+            ViewBag.var = id;
+
+            IEnumerable<Result> data = ResultTable.GetDataByTestId(id);
+
+            return View(data);
         }
 
         public ActionResult ChartView(string name)
