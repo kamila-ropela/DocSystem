@@ -57,3 +57,13 @@
         <button class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorSickLeave", "Doctor") + "'");">Add sick leave</button>
     </div>
 </div>
+<div>
+
+    <input id="url" type="hidden" style="width: 90%;" value="" name="TxtUrl" />
+    <script>
+        var test = "https://localhost:44358/Patient/Visit/" + @ViewBag.var;
+        document.getElementById("url").value = test;
+    </script>
+    <button type="submit" class="btn btn-primary mb-2" name="BtnConvert">End visit</button>
+    <a class="btn btn-primary" onclick="@("window.location.href='" + @Url.Action("DoctorView", "Doctor") + "?id="+@ViewBag.patient+"'");">Go back</a>
+</div>
