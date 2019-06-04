@@ -82,10 +82,10 @@ namespace DocSystem.DatabaseFiles.Helper
 
 
 
-        public static void InsertData(int patientId, int doctorId, string medicine, string description, DateTime date, string refund)
+        public static void InsertData(int patientId, int doctorId, string medicine, string description, string date, string refund)
         {
             Properties.dbContext.ExecuteQuery($@"INSERT INTO  Prescription(PatientId, DoctorId, Medicine, Description, Date, Refund) 
-                                                     VALUES ({patientId},{doctorId},'{medicine}','{description}',Now(),'{refund}')");
+                                                     VALUES ({patientId},{doctorId},'{medicine}','{description}','{date}','{refund}')");
         }
 
 

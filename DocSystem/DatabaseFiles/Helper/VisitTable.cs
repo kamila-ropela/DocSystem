@@ -89,13 +89,13 @@ namespace DocSystem.DatabaseFiles.Helper
         {
             return Properties.dbContext.GetVisitDb($@"INSERT INTO Visit (PatientId, DoctorId, Type, Doctor, Status, Date) 
                                                      VALUES ('" + patientId + "," + doctorId + "," +
-                                                     type + "," + doctor + "," + status + "','CURDATE()');");
+                                                     type + "," + doctor + "," + status + "','"+date+"');");
         }
 
         public static void InsertD(int patientId, int doctorId, string type, string doctor, string status, string date)
         {
             Properties.dbContext.ExecuteQuery($@"INSERT INTO  Visit(PatientId, DoctorId, Type, Doctor, Status, Date) 
-                                                     VALUES ({patientId},{doctorId},'{type}','{doctor}','{status}',Now())");
+                                                     VALUES ({patientId},{doctorId},'{type}','{doctor}','{status}','{date}')");
         }
 
         public static void EditVisitById(int id, string status)

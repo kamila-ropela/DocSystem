@@ -27,7 +27,7 @@ namespace DocSystem.Controllers
                 MedicalDescriptionTable.AddDescription(Properties.UserId, patientId, model.Type, model.Description, date);
             }
 
-            return RedirectToAction("DoctorView", "Doctor", PatientTable.GetPatientById(patientId)[0]); 
+            return RedirectToAction("Visit", "Doctor", Properties.VisitId);
         }
 
         public IActionResult DoctorIndex()
@@ -84,9 +84,10 @@ namespace DocSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddDocumentationView([FromForm]Documentation documentation)
         {
-
-            DocumentationTable.InsertData(Properties.UserId, documentation);
-            return View();
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
+            DocumentationTable.InsertData(Properties.UserId,patientId, documentation, date);
+            return RedirectToAction("Visit", "Doctor", Properties.VisitId);
         }
 
 
@@ -98,6 +99,8 @@ namespace DocSystem.Controllers
         public IActionResult Visit(int id)
         {
             ViewBag.var = id;
+            ViewBag.patient = Properties.patient;
+            Properties.VisitId = id;
 
             var data = VisitTable.GetDataById(id);
 
@@ -121,6 +124,8 @@ namespace DocSystem.Controllers
         public IActionResult DoctorView(Patient patient)
         {
             patientId = patient.Id;
+            Properties.patient = patient;
+
             var doctorSpecialization = DoctorTable.GetSpecializationById(Properties.UserId);
 
 
@@ -157,9 +162,9 @@ namespace DocSystem.Controllers
             var patients = PatientTable.GetPatientById(patientId);
 
             DateTime time = DateTime.Now.Date;
-           // string date = time.ToString("yyyy-MM-dd");
-            PrescriptionTable.InsertData( patients[0].Id, Properties.UserId, presc.Medicine, presc.Description, time, presc.Refund);
-            return View();
+            string date = time.ToString("yyyy-MM-dd");
+            PrescriptionTable.InsertData( patients[0].Id, Properties.UserId, presc.Medicine, presc.Description, date, presc.Refund);
+            return RedirectToAction("Visit", "Doctor", Properties.VisitId);
 
         }
         public IActionResult DoctorVisit(int id)
@@ -184,13 +189,13 @@ namespace DocSystem.Controllers
                 visits.Status = "pending";
             else if (visits.Type == "test")
             {
-                TestTable.InsertData(Properties.UserId, patientId, "", date); 
+                TestTable.InsertData( patientId, Properties.UserId, "", date); 
                 visits.Status = "pending";
             }
 
             VisitTable.InsertD(patients[0].Id, Properties.UserId, visits.Type, visits.Doctor, visits.Status, date);
 
-            return View();
+            return RedirectToAction("DoctorView", "Doctor", PatientTable.GetPatientById(patientId)[0]);
 
 
         }
@@ -213,13 +218,13 @@ namespace DocSystem.Controllers
         public ActionResult DoctorSickLeave([FromForm]SickLeave sl)
         {
             var patients = PatientTable.GetPatientById(patientId);
-            DateTime time = DateTime.Now;
-            // string date = time.ToString("yyyy-MM-dd");
-            SickLeaveTable.InsertD(patients[0].Id, Properties.UserId, sl.Days, sl.Description, time);
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
+            SickLeaveTable.InsertD(patients[0].Id, Properties.UserId, sl.Days, sl.Description, date);
 
-            return View();
+            return RedirectToAction("Visit", "Doctor", Properties.VisitId);
 
-         
+
         }
 
 

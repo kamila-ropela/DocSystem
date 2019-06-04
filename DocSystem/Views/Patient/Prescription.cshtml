@@ -45,9 +45,8 @@
     </div>
     <input id="url" type="hidden" style="width: 90%;" value="" name="TxtUrl" />
     <script>
-        var test = "https://localhost:44358/Patient/Prescription/" + @ViewBag.var;
+        var test = "https://localhost:44358/Patient/PdfPrescription/" + @ViewBag.var;
         document.getElementById("url").value = test;
     </script>
-    <input class="input-lg" type="submit" name="BtnConvert" value="Create PDF" class="mybutton" />
-
+    <button class="btn btn-primary mb-2" type="submit" name="BtnConvert">Create PDF</button>
 }
