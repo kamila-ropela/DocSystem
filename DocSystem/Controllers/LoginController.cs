@@ -30,7 +30,7 @@ namespace DocSystem.Controllers
                     Properties.UserId = data.Item1;
                     Properties.UserRole = data.Item2;
                     if (data.Item2 == 1)
-                        return RedirectToAction("DoctorView", "Doctor");
+                        return RedirectToAction("DoctorIndex", "Doctor");
                     else
                         return RedirectToAction("PatientView", "Patient");
                 }
