@@ -1,0 +1,92 @@
+﻿@model IEnumerable<DocSystem.Models.Prescription>
+@{
+    Layout = null;
+}
+
+<html>
+<head>
+    <style>
+        .grid-container {
+            width: 500px;
+            display: grid;
+            grid-gap: 10px;
+            padding: 10px;
+        }
+
+        .grid-item {
+            text-align: center;
+            padding: 20px;
+            font-size: 30px;
+        }
+
+        .item1 {
+            grid-column: 1 / span 2;
+            grid-row: 2;
+        }
+
+        table, td, th {
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            padding: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h2><center>Prescription</center></h2>
+
+    <div class="grid-container">
+        <div class="grid-item">
+            <table style="float: left">
+                <tr>
+                    <td></td>
+                    <td><b>@((ViewBag.patient as ICollection<Patient>).First().Name)</b></td>
+                    <td><b>Doctor</b></td>
+                    <td>@((ViewBag.doctor as ICollection<Doctor>).First().Name)</td>
+                </tr>
+                <tr>
+                    <td>Pesel</td>
+                    <td>@((ViewBag.patient as ICollection<Patient>).First().Pesel)</td>
+                    <th><b>Speclialization</b></th>
+                    <td>@((ViewBag.doctor as ICollection<Doctor>).First().Specialization)</td>
+                </tr>
+                <tr>
+                    <th><b>Address</b></th>
+                    <td>@((ViewBag.patient as ICollection<Patient>).First().Address)</td>
+                </tr>
+                </table>
+        </div>
+        <div class="grid-item item1">
+            <table>
+                @foreach (var item in Model)
+                {
+                    <tr></tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Medicine)</th>
+                        <td>@item.Medicine</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Description)</th>
+                        <td>@item.Description</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Date)</th>
+                        <td>@item.Date.ToString("dd-MM-yyyy")</td>
+                    </tr>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.Refund)</th>
+                        <td>@item.Refund</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+</body>
+</html>

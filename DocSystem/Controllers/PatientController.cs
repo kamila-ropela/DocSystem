@@ -38,22 +38,6 @@ namespace Patients.Controllers
         }
 
         [HttpPost]
-        public ActionResult SubmitAction(IFormCollection collection)
-        {
-         
-            HtmlToPdf converter = new HtmlToPdf();
-           
-            PdfDocument doc = converter.ConvertUrl(collection["TxtUrl"]);
-            byte[] pdf = doc.Save();
-            doc.Close();
-
-            FileResult fileResult = new FileContentResult(pdf, "application/pdf");
-            fileResult.FileDownloadName = "Document.pdf";
-            return fileResult;
-          
-        }
-
-        [HttpPost]
         public ActionResult PatientView([FromForm]string searchString)
         {
 
@@ -266,5 +250,84 @@ namespace Patients.Controllers
             output.Test = tmpT;
             return View(output);
         }
+
+        [HttpPost]
+        public ActionResult SubmitAction(IFormCollection collection)
+        {
+
+            HtmlToPdf converter = new HtmlToPdf();
+
+            PdfDocument doc = converter.ConvertUrl(collection["TxtUrl"]);
+            byte[] pdf = doc.Save();
+            doc.Close();
+
+            FileResult fileResult = new FileContentResult(pdf, "application/pdf");
+            fileResult.FileDownloadName = "Document.pdf";
+            return fileResult;
+
+        }
+
+        public IActionResult PdfVisit(int id)
+        {
+            var visit = VisitTable.GetDataById(id);
+            var patData = PatientTable.GetPatientById(Properties.UserId);
+            patData[0].Name = patData[0].Name + " " + patData[0].Surname;
+            ViewBag.patient = patData;
+
+            var doc = DoctorTable.GetDoctorIdByName(visit[0].DoctorName);
+            var docData = DoctorTable.GetSpecializationById(doc[0].Id);
+            docData[0].Name = docData[0].Name + " " + docData[0].Surname;
+            ViewBag.doctor = docData;
+
+            return View(visit);
+        }
+
+        public IActionResult PdfPrescription(int id)
+        {
+            var prescription = PrescriptionTable.GetDataById(id);
+            var patData = PatientTable.GetPatientById(Properties.UserId);
+            patData[0].Name = patData[0].Name + " " + patData[0].Surname;
+            ViewBag.patient = patData;
+
+            var doc = DoctorTable.GetDoctorIdByName(prescription[0].DoctorName);
+            var docData = DoctorTable.GetSpecializationById(doc[0].Id);
+            docData[0].Name = docData[0].Name + " " + docData[0].Surname;
+            ViewBag.doctor = docData;
+
+            return View(prescription);
+        }
+
+        public IActionResult PdfSickLeave(int id)
+        {
+            var sickLeave = SickLeaveTable.GetData(id);
+            var patData = PatientTable.GetPatientById(Properties.UserId);
+            patData[0].Name = patData[0].Name + " " + patData[0].Surname;
+            ViewBag.patient = patData;
+
+            var doc = DoctorTable.GetDoctorIdByName(sickLeave[0].DoctorName);
+            var docData = DoctorTable.GetSpecializationById(doc[0].Id);
+            docData[0].Name = docData[0].Name + " " + docData[0].Surname;
+            ViewBag.doctor = docData;
+
+            return View(sickLeave);
+        }
+
+        public IActionResult PdfResults(int id)
+        {
+            var results = ResultTable.GetDataByTestId(id);
+
+            var docName = TestTable.GetDataById(results[0].TestId);
+            var doc = DoctorTable.GetDoctorIdByName(docName[0].DoctorName);
+            var docData = DoctorTable.GetSpecializationById(doc[0].Id);
+            docData[0].Name = docData[0].Name + " " + docData[0].Surname;
+            ViewBag.doctor = docData;
+
+            var patData = PatientTable.GetPatientById(Properties.UserId);
+            patData[0].Name = patData[0].Name + " " + patData[0].Surname;
+            ViewBag.patient = patData;
+
+            return View(results);
+        }
+
     }
 }

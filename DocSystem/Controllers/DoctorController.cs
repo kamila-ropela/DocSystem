@@ -84,8 +84,9 @@ namespace DocSystem.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult AddDocumentationView([FromForm]Documentation documentation)
         {
-
-            DocumentationTable.InsertData(Properties.UserId, documentation);
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
+            DocumentationTable.InsertData(Properties.UserId,patientId, documentation, date);
             return View();
         }
 
@@ -98,6 +99,8 @@ namespace DocSystem.Controllers
         public IActionResult Visit(int id)
         {
             ViewBag.var = id;
+
+            Properties.VisitId = id;
 
             var data = VisitTable.GetDataById(id);
 
@@ -157,8 +160,8 @@ namespace DocSystem.Controllers
             var patients = PatientTable.GetPatientById(patientId);
 
             DateTime time = DateTime.Now.Date;
-           // string date = time.ToString("yyyy-MM-dd");
-            PrescriptionTable.InsertData( patients[0].Id, Properties.UserId, presc.Medicine, presc.Description, time, presc.Refund);
+            string date = time.ToString("yyyy-MM-dd");
+            PrescriptionTable.InsertData( patients[0].Id, Properties.UserId, presc.Medicine, presc.Description, date, presc.Refund);
             return View();
 
         }
@@ -213,9 +216,9 @@ namespace DocSystem.Controllers
         public ActionResult DoctorSickLeave([FromForm]SickLeave sl)
         {
             var patients = PatientTable.GetPatientById(patientId);
-            DateTime time = DateTime.Now;
-            // string date = time.ToString("yyyy-MM-dd");
-            SickLeaveTable.InsertD(patients[0].Id, Properties.UserId, sl.Days, sl.Description, time);
+            DateTime time = DateTime.Now.Date;
+            string date = time.ToString("yyyy-MM-dd");
+            SickLeaveTable.InsertD(patients[0].Id, Properties.UserId, sl.Days, sl.Description, date);
 
             return View();
 

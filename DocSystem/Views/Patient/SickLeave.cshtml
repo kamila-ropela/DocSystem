@@ -40,9 +40,9 @@
 <div>
     <input id="url" type="hidden" style="width: 90%;" value="" name="TxtUrl" />
     <script>
-        var test = "https://localhost:44358/Patient/SickLeave/" + @ViewBag.id + "?patientId=" + @ViewBag.patientId;
+        var test = "https://localhost:44358/Patient/PdfSickLeave/" + @ViewBag.id;@*// + "?patientId=" + @ViewBag.patientId;*@
         document.getElementById("url").value = test;
     </script>
-    <input type="submit" name="BtnConvert" value="Create PDF" class="btn-default" />
+    <button type="submit" name="BtnConvert" class="btn btn-primary mb-2">Create PDF</button>
 </div>
 }

@@ -22,7 +22,7 @@
                 <br /><br />
                 <div class="form-group" name="Name">
                     <label asp-for="Name" class="control-label"></label><br />
-                    <select asp-for="Name">
+                    <select asp-for="Name" class="form-control">
                         <option>Select name</option>
                         <option value="Red blood cell count">Red blood cell count</option>
                         <option value="Hemoglobin">Hemoglobin</option>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="form-group" name="Unit">
                     <label asp-for="Unit" class="control-label"></label><br />
-                    <select asp-for="Unit">
+                    <select asp-for="Unit" class="form-control">
                         <option>Select name</option>
                         <option value="G/l">G/l</option>
                         <option value="T/l">T/l</option>
@@ -53,7 +53,4 @@
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 

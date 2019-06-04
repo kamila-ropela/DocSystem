@@ -48,11 +48,11 @@ namespace DocSystem.DatabaseFiles.Helper
                                                      VALUES (" + patientId + "," + doctorId + ",'" +
                                                      disease + "','CURDATE()');");
         }
-        public static void InsertData(int doctorId, Documentation documentation)
+        public static void InsertData(int doctorId, int patientId, Documentation documentation, string date)
         {
             Properties.dbContext.ExecuteQuery($@"INSERT INTO Documentation (PatientId, DoctorId, Disease, Date) 
-                                                     VALUES (" + documentation.PatientId +"," + doctorId + ",'" +
-                                                     documentation.Disease + "', Now());");
+                                                     VALUES (" + patientId +"," + doctorId + ",'" +
+                                                     documentation.Disease + "', '"+date+"')");
         }
     }
 }
